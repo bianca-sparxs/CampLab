@@ -1,0 +1,7 @@
+.circle{
+    background-color: aqua;
+    height: 300px;
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+}
