@@ -1,22 +1,24 @@
 $(function () {
 
-
     class Shape {
+
         //takes in the path of each SVG, which cshape in the array it is
         constructor(path, n) {
             this.container = path.parentNode;
-            this.shape = path
+            this.orig = path.getAttribute("d").toString();
+            this.shape = path;
             this.c_shape_list = [ "M87.5,20.4L60.6,66.9l-27.8,48.4l36.4-0.1l58.6-0.4l0-94.3h-21.8H87.5z", "M54.6,20.4H32.8l0,94.3l58.6,0.4l36.4,0.1L99.9,66.9L73,20.4H54.6z"];
+
             this.c_shape = this.setCshapes(n);
-            this.directionx = 1000 * Math.random();
-            this.directiony = 1000 * Math.random();
+            this.directionx = 100 * Math.random();
+            this.directiony = 100 * Math.random();
             this.duration = 10000 * Math.random();
             this.anime = 
             {
-                targets: this.shape,
-                d: this.c_shape,
-                // translateX: this.directionx,
-                // translateY: this.directiony,
+                targets: this.container,
+                // d: this.c_shape,
+                translateX: this.directionx,
+                translateY: this.directiony,
                 easing: 'easeInOutQuad',
                 direction: 'alternate',
                 delay: 2000,
@@ -24,9 +26,13 @@ $(function () {
                 loop: true
             };
 
-
+            
+			// this.DOM.el.addEventListener('touchstart', this.mouseenterFn);
+			// this.DOM.el.addEventListener('touchend', this.mouseleaveFn);
 
             this.animate();
+
+            console.log(this.orig)
 
             
         }
@@ -35,25 +41,33 @@ $(function () {
             return this.c_shape_list[n];
         }
 
+
+        
+
         to_c() {
             // move.pause();
-            console.log("mouse entered");
+            // console.log("mouse entered");
+            // console.log(this)
+            // var move = anime(this.anime);
+
+            // move.pause()
             anime({
-                targets: this.parentNode,
+                targets: this.shape,
+                d: this.c_shape,
                 duration: 200,
-                translateX: 200
                 // changeBegin: function(anim) { moving.pause()}
             })
         }
 
         from_c() {
             // move.play();
-            console.log("mouse out")
+            // console.log("mouse out")
+            // console.log(this.orig)
 
             anime({
-                targets: this.parentNode,
-                duration: 2000,
-                translateX: -200
+                targets: this.shape,
+                d: this.orig,
+                duration: 200,
             })
         }
 
@@ -61,15 +75,15 @@ $(function () {
 
         animate() {
             anime(this.anime);
-            $(this.shape).hover( this.to_c, this.from_c)
+            this.shape.addEventListener('mouseenter', this.to_c.bind(this));
+			this.shape.addEventListener('mouseleave', this.from_c.bind(this));
+            
+            
         }
 
         
     }
     console.log($('.cir'));
-
-    let c_shape_path = [ "M87.5,20.4L60.6,66.9l-27.8,48.4l36.4-0.1l58.6-0.4l0-94.3h-21.8H87.5z", "M54.6,20.4H32.8l0,94.3l58.6,0.4l36.4,0.1L99.9,66.9L73,20.4H54.6z"];
-
 
     
 
@@ -77,7 +91,8 @@ $(function () {
 
     let shapes = [];
     let items = $('.cir').children('path');
-    let counter = 0
+    let counter = 0;
+    
 
     items.each( function() {
         console.log(counter)
@@ -89,9 +104,9 @@ $(function () {
         
     });
 
-    console.log("The items")
-    console.log(items)
-    console.log(shapes);
+    // console.log("The items")
+    // console.log(items)
+    // console.log(shapes);
 
 
     // shapes.each(animate);
