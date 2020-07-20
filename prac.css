@@ -1,7 +1,16 @@
+.container {
+    display: inline-flex;
+    flex-direction: row;
+    height: auto;
+    width: auto;
+}
 .circle{
-    background-color: aqua;
+    background-color: #eeeeee;
     height: 300px;
     width: 300px;
-    display: flex;
-    flex-direction: row;
+    margin: 30px;
 }
+
+/* .test {
+    margin-top:  700px;
+} */

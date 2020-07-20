@@ -1,5 +1,13 @@
 $(function () {
 
+    const CELL_FORM =[
+        [
+        "M97.58,37.2C92.18,46.5,82.08,64,79.18,69C69.18,86.4,59.28000000000001,103.4,48.080000000000005,122.9H64.18C76.28,122.9,112.08000000000001,124.10000000000001,112.08000000000001,122.80000000000001C111.98000000000002,112.80000000000001,112.08000000000001,90.00000000000001,112.08000000000001,77.10000000000001C112.08000000000001,56.20000000000001,112.58000000000001,44.900000000000006,112.08000000000001,12.100000000000009C99.78,33.1,105.48,23.5,97.58,37.2Z",
+    ],[ 
+    "M48.3,12.1c-0.5,32.8,0,44.1,0,65c0,12.9,0.1,35.7,0,45.7c0,1.3,35.8,0.1,47.9,0.1c8.9,0,16.1,0,16.1,0c-11.2-19.5-21.1-36.5-31.1-53.9C78.3,64,68.2,46.5,62.8,37.2C54.9,23.5,60.6,33.1,48.3,12.1z"
+        ]
+    ]
+
     class Shape {
 
         //takes in the path of each SVG, which cshape in the array it is
@@ -7,62 +15,98 @@ $(function () {
             this.container = path.parentNode;
             this.orig = path.getAttribute("d").toString();
             this.shape = path;
-            this.c_shape_list = [ "M87.5,20.4L60.6,66.9l-27.8,48.4l36.4-0.1l58.6-0.4l0-94.3h-21.8H87.5z", "M54.6,20.4H32.8l0,94.3l58.6,0.4l36.4,0.1L99.9,66.9L73,20.4H54.6z"];
+            this.pos = this.container.getBoundingClientRect();
+            console.log(this.pos)
 
+            //c_shapes are the completed shape that the svg path will morph into
+            this.c_shape_list = [ "M87.5,20.4L60.6,66.9l-27.8,48.4l36.4-0.1l58.6-0.4l0-94.3h-21.8H87.5z", "M54.6,20.4H32.8l0,94.3l58.6,0.4l36.4,0.1L99.9,66.9L73,20.4H54.6z"];
             this.c_shape = this.setCshapes(n);
-            this.directionx = 100 * Math.random();
-            this.directiony = 100 * Math.random();
+            this.d = this.setForms(n);
+
+            this.directionx = this.findX();
+            this.directiony = this.findY();
+            // console.log("moving x is: " + this.directionx.toString() + " moving y is: " + this.directiony.toString())
+
             this.duration = 10000 * Math.random();
-            this.anime = 
-            {
+
+            this.timeline = anime.timeline({
+                duration: this.duration
+            });
+
+            this.move = 
+            anime({
                 targets: this.container,
-                // d: this.c_shape,
+                d: this.c_shape,
                 translateX: this.directionx,
                 translateY: this.directiony,
+                scale: [ 0.5],
                 easing: 'easeInOutQuad',
                 direction: 'alternate',
-                delay: 2000,
-                duration: this.duration,
+                // delay: 2000,
+                duration: 2000,
                 loop: true
-            };
+            });
+            this.anime = 
+            anime({
+                targets: this.shape,
+                d: this.d,
+                easing: 'easeOutQuad',
+                // easing: 'cubicBezier(.5, .05, .1, .3)',
+                direction: 'alternate',
+                duration: 2000,
+                loop: true
+            });
 
             
 			// this.DOM.el.addEventListener('touchstart', this.mouseenterFn);
 			// this.DOM.el.addEventListener('touchend', this.mouseleaveFn);
 
             this.animate();
-
-            console.log(this.orig)
-
             
         }
 
         setCshapes(n) {
             return this.c_shape_list[n];
         }
+        setForms(n) {
+            return CELL_FORM[n];
+        }
+
+        findX() {
+            let dist = prm_mrdn - this.pos.left
+            if (this.pos.left < prm_mrdn) { 
+                return dist - (this.pos.width / 2) 
+            }
+            else { return dist - (this.pos.width / 2) }
+        }
+
+        findY() {
+            let dist = eqtr - this.pos.top
+            if (this.pos.top < eqtr) { 
+                return dist - (this.pos.top / 2) 
+            }
+            else { return dist - (this.pos.height / 2) }
+        } 
+
+
 
 
         
 
         to_c() {
-            // move.pause();
-            // console.log("mouse entered");
-            // console.log(this)
-            // var move = anime(this.anime);
 
-            // move.pause()
             anime({
                 targets: this.shape,
                 d: this.c_shape,
                 duration: 200,
-                // changeBegin: function(anim) { moving.pause()}
+                // changeBegin: function(anim) { this.move.pause()}
             })
         }
 
         from_c() {
-            // move.play();
-            // console.log("mouse out")
-            // console.log(this.orig)
+            // this.anime.play();
+            // this.move.play();
+            
 
             anime({
                 targets: this.shape,
@@ -74,11 +118,15 @@ $(function () {
         
 
         animate() {
-            anime(this.anime);
-            this.shape.addEventListener('mouseenter', this.to_c.bind(this));
-			this.shape.addEventListener('mouseleave', this.from_c.bind(this));
+            // this.timeline.add({
+
+            // })
             
+            this.move.play();
+            this.anime.play();
             
+            this.container.addEventListener('mouseenter', this.to_c.bind(this));
+			this.container.addEventListener('mouseleave', this.from_c.bind(this));
         }
 
         
@@ -90,19 +138,48 @@ $(function () {
 
 
     let shapes = [];
-    let items = $('.cir').children('path');
+    let items = $('.cir').children('path'); //the specific SVG paths, not the container that holds it
     let counter = 0;
+    //TODO: do jquery, on resize, calculate eath prime merdian and equator
+    let earth = $('.container').get(0).getBoundingClientRect() //container holding all the SVG elements
+    let eqtr = (earth.height + earth.top) / 2;
+    let prm_mrdn = (earth.width + earth.left) / 2;
+    
+    
+    // console.log(earth)
+
+
+
+    // console.log(" prime meridian is " + prm_mrdn.toString() + " and equator is " + eqtr.toString())
+    // let check = earth.right - $('.container').width() / 2;
+    // console.log("apprx prm mer is: " + check.toString())
+
     
 
     items.each( function() {
         console.log(counter)
-        // console.log(this.parentNode)
+        // console.log(this.getBoundingClientRect())
         let obj = new Shape(this, counter)
-        // obj.c_shape = c_shape_path[counter]
         shapes.push(obj);
         counter++
         
     });
+
+    $('.cir').hover (
+        function () {
+            $(shapes).each( function() {
+                this.move.pause();
+                this.anime.pause();
+            })
+        },
+
+        function () {
+            $(shapes).each( function() {
+                this.anime.play();
+                this.move.play();
+            })
+        }
+    )
 
     // console.log("The items")
     // console.log(items)
@@ -203,7 +280,7 @@ $(function () {
 
     let ihenile = [];
     dotarray();
-    console.log(ihenile);
+    // console.log(ihenile);
 
     let cnvs = $("#ndeewo").get(0);
     var ctx = cnvs.getContext("2d");
