@@ -19,7 +19,7 @@ $(function () {
             console.log(this.pos)
 
             //c_shapes are the completed shape that the svg path will morph into
-            this.c_shape_list = [ "M87.5,20.4L60.6,66.9l-27.8,48.4l36.4-0.1l58.6-0.4l0-94.3h-21.8H87.5z", "M54.6,20.4H32.8l0,94.3l58.6,0.4l36.4,0.1L99.9,66.9L73,20.4H54.6z"];
+            this.c_shape_list = [ "m 87.5,20.4L60.6,66.9l-27.8,48.4l36.4-0.1l58.6-0.4l0-94.3h-21.8H87.5z", "m 54.6,20.4H32.8l0,94.3l58.6,0.4l36.4,0.1L99.9,66.9L73,20.4H54.6z"];
             this.c_shape = this.setCshapes(n);
             this.d = this.setForms(n);
 
@@ -34,12 +34,18 @@ $(function () {
             });
 
             this.move = 
-            anime({
+            anime.timeline({
                 targets: this.container,
-                d: this.c_shape,
-                translateX: this.directionx,
-                translateY: this.directiony,
-                scale: [ 0.5],
+                keyframes: [ 
+                    {translateX: this.directionx,
+                    translateY: this.directiony,},
+                    {translateX: 0,
+                        translateY: 0, delay: 2000}
+
+
+                ],
+                // translateX: this.directionx,
+                // translateY: this.directiony,
                 easing: 'easeInOutQuad',
                 direction: 'alternate',
                 // delay: 2000,
@@ -108,22 +114,24 @@ $(function () {
             // this.move.play();
             
 
-            anime({
-                targets: this.shape,
-                d: this.orig,
-                duration: 200,
-            })
+            // anime({
+            //     targets: this.shape,
+            //     d: this.orig,
+            //     duration: 200,
+            // })
         }
 
         
 
         animate() {
-            // this.timeline.add({
+            this.move.add({
+                targets: this.shape,
+                fill: '#123412'
 
-            // })
+            })
             
             this.move.play();
-            this.anime.play();
+            // this.anime.play();
             
             this.container.addEventListener('mouseenter', this.to_c.bind(this));
 			this.container.addEventListener('mouseleave', this.from_c.bind(this));
