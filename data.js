@@ -36,10 +36,8 @@ $(function () {
             this.move = 
             anime({
                 targets: this.container,
-                d: this.c_shape,
                 translateX: this.directionx,
                 translateY: this.directiony,
-                scale: [ 0.5],
                 easing: 'easeInOutQuad',
                 direction: 'alternate',
                 // delay: 2000,
