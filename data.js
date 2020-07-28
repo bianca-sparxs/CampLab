@@ -2,10 +2,14 @@ $(function () {
 
     const CELL_FORM =[
         [
-        "M97.58,37.2C92.18,46.5,82.08,64,79.18,69C69.18,86.4,59.28000000000001,103.4,48.080000000000005,122.9H64.18C76.28,122.9,112.08000000000001,124.10000000000001,112.08000000000001,122.80000000000001C111.98000000000002,112.80000000000001,112.08000000000001,90.00000000000001,112.08000000000001,77.10000000000001C112.08000000000001,56.20000000000001,112.58000000000001,44.900000000000006,112.08000000000001,12.100000000000009C99.78,33.1,105.48,23.5,97.58,37.2Z",
-    ],[ 
-    "M48.3,12.1c-0.5,32.8,0,44.1,0,65c0,12.9,0.1,35.7,0,45.7c0,1.3,35.8,0.1,47.9,0.1c8.9,0,16.1,0,16.1,0c-11.2-19.5-21.1-36.5-31.1-53.9C78.3,64,68.2,46.5,62.8,37.2C54.9,23.5,60.6,33.1,48.3,12.1z"
-        ]
+            "M138.35,81.18c-1.18-4.71,11.95-31.26-8.79-34.81c-18.93-3.24-22.22,14.82-26.2,32.61c-2.54,11.38-15.19,27.37-5.68,33.34c6,3.77,2.07,3.49,18.5,4.76c18.79,1.45,12.9,3.51,18.79,0C144.29,111.52,141.12,92.25,138.35,81.18z",
+            "M127.91,81.18c0-4.86,0.35-20.6,0-37.16c-9.17,15.95-10.86,18.88-20.16,34.96c-5.86,10.9-19.6,32.79-23.14,40.04c1.16,0,13.69,0,31.57,0c1.37,0,10.95,0,11.73,0C127.91,117.55,127.91,93.05,127.91,81.18z"
+         ],
+        [ 
+            "M113.43,94.05c3.77,2.11,4.4,9.99,8.66,10.72c5.55,0.95-0.49,8.75,5.82,9.1c13.67,0.76,25.69,2.52,33.61,0.07c7.5-2.32,6.03-21.53,2.75-32.12c-3.58-11.55-24.78-36.07-34.21-35.31c-9.52,0.77,7.28,21-6.87,24.05c-7.82,1.68-10.47,7.09-14.98,10.85c-3.26,2.72-6.87,2.39-5.63,8.11C103.36,93.14,109.88,92.06,113.43,94.05z",
+            "M127.91,94.05c0,1.26,0,8.04,0,10.72c0,5.63,0,10.28,0,14.26c16.57,0,33.89,0,43.3,0c-2.13-3.54-12.73-22.12-18.3-31.71c-5.71-9.82-23.38-40.51-25-43.29c0,3.35,0,12.06,0,26.53c0,6.04-0.02,8.5-0.02,10.69c0.02,4.18,0.02,2.43,0.02,8.28C127.91,90.41,127.91,93.01,127.91,94.05z"
+        ],
+        ["M99.42,102.69c3.77,2.11,8.39,1.86,12.16-0.24c4.42-2.45,10.01-4.49,16.32-4.14c13.67,0.76,19.09,12.07,27.02,9.62c7.5-2.32,12.63-15.52,9.34-26.11c-3.58-11.55-16.4-17.52-25.83-16.76c-9.52,0.77-10.04,7.95-24.18,10.99c-7.82,1.68-11.71,0.36-16.21,4.12c-3.26,2.72-6.74,8.02-5.5,13.74C93.33,97.54,95.87,100.7,99.42,102.69z"]
     ]
 
     class Shape {
@@ -19,7 +23,7 @@ $(function () {
             console.log(this.pos)
 
             //c_shapes are the completed shape that the svg path will morph into
-            this.c_shape_list = [ "M87.5,20.4L60.6,66.9l-27.8,48.4l36.4-0.1l58.6-0.4l0-94.3h-21.8H87.5z", "M54.6,20.4H32.8l0,94.3l58.6,0.4l36.4,0.1L99.9,66.9L73,20.4H54.6z"];
+            this.c_shape_list = [ "m 87.5,20.4L60.6,66.9l-27.8,48.4l36.4-0.1l58.6-0.4l0-94.3h-21.8H87.5z", "m 54.6,20.4H32.8l0,94.3l58.6,0.4l36.4,0.1L99.9,66.9L73,20.4H54.6z"];
             this.c_shape = this.setCshapes(n);
             this.d = this.setForms(n);
 
@@ -34,10 +38,18 @@ $(function () {
             });
 
             this.move = 
-            anime({
+            anime.timeline({
                 targets: this.container,
-                translateX: this.directionx,
-                translateY: this.directiony,
+                keyframes: [ 
+                    {translateX: this.directionx,
+                    translateY: this.directiony,},
+                    {translateX: 0,
+                        translateY: 0, delay: 5000}
+
+
+                ],
+                // translateX: this.directionx,
+                // translateY: this.directiony,
                 easing: 'easeInOutQuad',
                 direction: 'alternate',
                 // delay: 2000,
@@ -47,10 +59,11 @@ $(function () {
             this.anime = 
             anime({
                 targets: this.shape,
-                d: this.d,
+                d: [{value: this.d[0]}, {value: this.d[1]}],
                 easing: 'easeOutQuad',
                 // easing: 'cubicBezier(.5, .05, .1, .3)',
                 direction: 'alternate',
+                // delay: 500,
                 duration: 2000,
                 loop: true
             });
@@ -79,9 +92,10 @@ $(function () {
         }
 
         findY() {
-            let dist = eqtr - this.pos.top
-            if (this.pos.top < eqtr) { 
-                return dist - (this.pos.top / 2) 
+            let trueY = this.pos.top + window.scrollY; //becuz this.top changes relative to viewport aka changes on scroll
+            let dist = eqtr - trueY
+            if (trueY < eqtr) { 
+                return dist - (this.pos.height / 2) 
             }
             else { return dist - (this.pos.height / 2) }
         } 
@@ -106,25 +120,27 @@ $(function () {
             // this.move.play();
             
 
-            anime({
-                targets: this.shape,
-                d: this.orig,
-                duration: 200,
-            })
+            // anime({
+            //     targets: this.shape,
+            //     d: this.orig,
+            //     duration: 200,
+            // })
         }
 
         
 
         animate() {
-            // this.timeline.add({
+            this.move.add({
+                targets: this.shape,
+                // fill: '#123412'
 
-            // })
+            })
             
             this.move.play();
-            this.anime.play();
+            // this.anime.play();
             
-            this.container.addEventListener('mouseenter', this.to_c.bind(this));
-			this.container.addEventListener('mouseleave', this.from_c.bind(this));
+            this.shape.addEventListener('mouseenter', this.to_c.bind(this));
+			this.shape.addEventListener('mouseleave', this.from_c.bind(this));
         }
 
         
@@ -140,16 +156,18 @@ $(function () {
     let counter = 0;
     //TODO: do jquery, on resize, calculate eath prime merdian and equator
     let earth = $('.container').get(0).getBoundingClientRect() //container holding all the SVG elements
-    let eqtr = (earth.height + earth.top) / 2;
+    let eqtr = (earth.height + (earth.top + window.scrollY)) / 2;
     let prm_mrdn = (earth.width + earth.left) / 2;
     
     
     // console.log(earth)
 
+    // console.log(window.scrollY)
 
 
-    // console.log(" prime meridian is " + prm_mrdn.toString() + " and equator is " + eqtr.toString())
-    // let check = earth.right - $('.container').width() / 2;
+
+    console.log(" prime meridian is " + prm_mrdn.toString() + " and equator is " + eqtr.toString())
+    // let check = earth.right - $('.container').height() / 2;
     // console.log("apprx prm mer is: " + check.toString())
 
     
@@ -181,7 +199,7 @@ $(function () {
 
     // console.log("The items")
     // console.log(items)
-    // console.log(shapes);
+    console.log(shapes);
 
 
     // shapes.each(animate);
