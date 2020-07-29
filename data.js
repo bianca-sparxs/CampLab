@@ -10,7 +10,8 @@ $(function () {
             "M127.91,94.05c0,1.26,0,8.04,0,10.72c0,5.63,0,10.28,0,14.26c16.57,0,33.89,0,43.3,0c-2.13-3.54-12.73-22.12-18.3-31.71c-5.71-9.82-23.38-40.51-25-43.29c0,3.35,0,12.06,0,26.53c0,6.04-0.02,8.5-0.02,10.69c0.02,4.18,0.02,2.43,0.02,8.28C127.91,90.41,127.91,93.01,127.91,94.05z"
         ],
         ["M99.42,102.69c3.77,2.11,8.39,1.86,12.16-0.24c4.42-2.45,10.01-4.49,16.32-4.14c13.67,0.76,19.09,12.07,27.02,9.62c7.5-2.32,12.63-15.52,9.34-26.11c-3.58-11.55-16.4-17.52-25.83-16.76c-9.52,0.77-10.04,7.95-24.18,10.99c-7.82,1.68-11.71,0.36-16.21,4.12c-3.26,2.72-6.74,8.02-5.5,13.74C93.33,97.54,95.87,100.7,99.42,102.69z"]
-    ]
+        ]
+
 
     class Shape {
 
@@ -31,42 +32,64 @@ $(function () {
             this.directiony = this.findY();
             // console.log("moving x is: " + this.directionx.toString() + " moving y is: " + this.directiony.toString())
 
-            this.duration = 10000 * Math.random();
+            this.duration = 2000;
 
-            this.timeline = anime.timeline({
-                duration: this.duration
-            });
-
-            this.move = 
-            anime.timeline({
-                targets: this.container,
-                keyframes: [ 
-                    {translateX: this.directionx,
-                    translateY: this.directiony,},
-                    {translateX: 0,
-                        translateY: 0, delay: 5000}
-
-
-                ],
-                // translateX: this.directionx,
-                // translateY: this.directiony,
+            this.move = anime.timeline({
+                duration: this.duration,
                 easing: 'easeInOutQuad',
-                direction: 'alternate',
-                // delay: 2000,
-                duration: 2000,
-                loop: true
+                // easing: 'steps(7)',
+                complete: function() {this.restart();}
             });
+
+            this.biakota = 
+            {
+                targets: this.container,
+                // keyframes: [ 
+                //     {translateX: this.directionx,
+                //     translateY: this.directiony,},
+                //     {translateX: 0,
+                //         translateY: 0, delay: 5000}
+
+
+                // ],
+ 
+                translateX: this.directionx,
+                translateY: this.directiony,
+                // direction: 'alternate',
+                // delay: 2000,
+                duration: this.duration,
+                // loop: true
+            };
             this.anime = 
             anime({
                 targets: this.shape,
                 d: [{value: this.d[0]}, {value: this.d[1]}],
-                easing: 'easeOutQuad',
-                // easing: 'cubicBezier(.5, .05, .1, .3)',
+                // easing: 'easeOutQuad',
+                // easing: 'steps(7)',
+                easing: 'cubicBezier(.5, .05, .1, .3)',
                 direction: 'alternate',
                 // delay: 500,
-                duration: 2000,
+                duration: this.duration * 2,
                 loop: true
             });
+
+            this.move.add(this.biakota)
+            .add({
+                targets: this.shape,
+                fill: '#1a34f2',
+                // duration: 500
+            })
+            .add({
+                targets: this.shape,
+                fill: '#000000',
+                // duration: 500
+            })
+            .add({
+                targets: this.container,
+                translateX: 0,
+                translateY: 0,
+                // duration: this.duration
+            })
 
             
 			// this.DOM.el.addEventListener('touchstart', this.mouseenterFn);
@@ -120,18 +143,18 @@ $(function () {
             // this.move.play();
             
 
-            // anime({
-            //     targets: this.shape,
-            //     d: this.orig,
-            //     duration: 200,
-            // })
+            anime({
+                targets: this.shape,
+                d: this.orig,
+                duration: 200,
+            })
         }
 
         
 
         animate() {
             this.move.add({
-                targets: this.shape,
+                // targets: this.shape,
                 // fill: '#123412'
 
             })
@@ -154,6 +177,7 @@ $(function () {
     let shapes = [];
     let items = $('.cir').children('path'); //the specific SVG paths, not the container that holds it
     let counter = 0;
+    
     //TODO: do jquery, on resize, calculate eath prime merdian and equator
     let earth = $('.container').get(0).getBoundingClientRect() //container holding all the SVG elements
     let eqtr = (earth.height + (earth.top + window.scrollY)) / 2;
@@ -202,125 +226,10 @@ $(function () {
     console.log(shapes);
 
 
-    // shapes.each(animate);
-
-    // for (var i = 0; i < shapes.length; i++){
-    //     animate(shapes[i])
-    // }
-    // function onHover () {
-
-    // }
-
 
 
 
     //problem with this probably you want a div to chnage shape when actually
     //you should have a svg inside the div and animate that
-
-    //anime js doesn't take var
-
-    //TMRW: use svg, change into something, add multiple svg's
-    // var moving = anime({
-    //     targets: '.cir',
-    //     translateX: 250,
-    //     translateY: 10,
-    //     easing: 'easeInOutSine',
-    //     duration: 3000,
-    //     direction: 'alternate',
-    //     loop: true
-    //   });
-
-    // var circle = $('.circle')
-    // var sveg = $('.cir ').children('path')
-    // var path = $('.points')
-    // // console.log(path)
-    // // console.log(sveg)
-
-    
-    // function onHover () {
-    //     anime({
-            
-    //     })
-    // }
-
-    
-    // $('.cir').hover(
-    //     function() {
-    //         // moving.pause();
-    //         anime({
-    //             targets: ".point",
-    //             duration: 2000,
-    //             d: "M87.5,20.4L60.6,66.9l-27.8,48.4l36.4-0.1l58.6-0.4l0-94.3h-21.8H87.5z",
-    //             changeBegin: function(anim) { moving.pause()}
-    //         })
-            
-    //     },
-    //     function () {
-    //         anime({
-    //             targets: ".point",
-    //             duration: 5000,
-    //             d: "M29.4,54.1c-6.6,8.4-8.8,14.2-8,20c1.7,12.2,16.7,22.6,26.7,20c11.5-3,11.3-22.1,18.7-22.7c11.5-0.9,15.1,45.1,32,48C115,122.1,147,86,137.5,52.7c-5.8-20.1-25-33.1-42.7-36C62.8,11.4,40.6,39.8,29.4,54.1z",
-    //             changeComplete: function(anim) {
-    //                 console.log("done!");
-    //                 moving.play();
-    //             }
-    //         })
-            
-    //     }
-    // )
-
-    // const items = $()
-
-    const DATA_POINT = 200;
-    const DOT_SIZE  = 10;
-    const PG_WIDTH = window.innerWidth;
-    const PG_HEIGHT = window.innerHeight;
-
-    function tinyedot(x, y) {
-        let data =  {
-            x: x,
-            y: y,
-            r: DOT_SIZE
-        }
-        return data
-    }
-
-    function dotarray() {
-        ihenile = [];
-        for (var i = 0; i < DATA_POINT; i++) {
-            var x = PG_WIDTH * Math.random()
-            var y = PG_HEIGHT * Math.random()
-            ihenile.push(tinyedot(x, y))
-        }
-    }
-
-    let ihenile = [];
-    dotarray();
-    // console.log(ihenile);
-
-    let cnvs = $("#ndeewo").get(0);
-    var ctx = cnvs.getContext("2d");
-
- 
-
-    function initDots(selector) {
-        for ( let x = 0; x < ihenile.length; x++) {
-            ctx.strokeStyle = "blue"
-            ctx.beginPath();
-            ctx.arc(ihenile[x].x, ihenile[x].y, DOT_SIZE, 0, Math.PI *2, false);
-            ctx.stroke();
-
-            $(selector).add("<span></span>")
-        }
-
-    }
-
-    function draw () {
-        cnvs.width = $(window).width();
-        cnvs.height = window.innerHeight;
-        initDots(cnvs)
-    }
-    
-    draw();
 
 })
