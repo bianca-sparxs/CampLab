@@ -76,14 +76,14 @@ $(function () {
             this.move.add(this.biakota)
             .add({
                 targets: this.shape,
-                fill: '#1a34f2',
-                // duration: 500
+                // fill: '#1a34f2',
+                // duration: 8000
             })
-            .add({
-                targets: this.shape,
-                fill: '#000000',
-                // duration: 500
-            })
+            // .add({
+            //     targets: this.shape,
+            //     // fill: '#000000',
+            //     // duration: 500
+            // })
             .add({
                 targets: this.container,
                 translateX: 0,
@@ -144,9 +144,9 @@ $(function () {
             
 
             anime({
-                targets: this.shape,
-                d: this.orig,
-                duration: 200,
+                // targets: this.shape,
+                // d: this.orig,
+                // duration: 200,
             })
         }
 
@@ -177,7 +177,7 @@ $(function () {
     let shapes = [];
     let items = $('.cir').children('path'); //the specific SVG paths, not the container that holds it
     let counter = 0;
-    
+
     //TODO: do jquery, on resize, calculate eath prime merdian and equator
     let earth = $('.container').get(0).getBoundingClientRect() //container holding all the SVG elements
     let eqtr = (earth.height + (earth.top + window.scrollY)) / 2;
