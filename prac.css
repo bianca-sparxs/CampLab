@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600&display=swap');
 body {
     background-color: #eff2f1;
 }
@@ -23,6 +24,38 @@ body {
 
 .cir {
     /* border: 1px dashed slateblue; */
+    /* transition: 333ms; */
+}
+
+.data {
+    /* mix-blend-mode: multiply; */
+}
+
+.hero {
+    flex-grow: 3;
+    padding: 50px;
+}
+
+.herotext {
+    font-family: "IBM Plex Mono";
+    font-size: 5vw;
+}
+
+
+.biguy {
+    display: flex;
+    margin-top: 100px;
+}
+
+/* .dot {
+    animation: disappear 16s ease infinite;
+} */
+
+@keyframes dissappear {
+    0%{opacity: 1;}
+    50%{opacity: 0;}
+    100%{opacity: 1;}
+
 }
 
 .css-selector {
