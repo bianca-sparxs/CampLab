@@ -211,6 +211,8 @@ $(function () {
                 this.move.pause();
                 this.anime.pause();
             })
+
+            
         },
 
         function () {
