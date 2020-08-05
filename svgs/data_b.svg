@@ -4,14 +4,11 @@
 	 viewBox="0 0 255.8 156.6" style="enable-background:new 0 0 255.8 156.6;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:url(#SVGID_1_);}
-	.st1{opacity:0.83;}
 </style>
-<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="143.2978" y1="35.5151" x2="103.6578" y2="104.1736" gradientTransform="matrix(1 0 0 -1 0 158)">
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="153.6336" y1="41.4479" x2="114.1576" y2="109.8222" gradientTransform="matrix(1 0 0 -1 0 158)">
 	<stop  offset="0" style="stop-color:#D3D1A1"/>
 	<stop  offset="1" style="stop-color:#65C8D0"/>
 </linearGradient>
-<path class="st0" d="M158.1,81.2c-1.2-4.7-7.8-31.3-28.6-34.8c-18.9-3.2-37.1,14.8-41,32.6c-2.5,11.4-0.3,27.4,9.2,33.3
-	c6,3.8,9.6,0.2,26,1.5c18.8,1.4,23.1,6.8,28.9,3.3C162,111.5,160.9,92.3,158.1,81.2z"/>
-<path class="st1" d="M112.5,70.3c-4.5-0.7-9.4,3.4-8.8,5.6c0.5,1.8,4.9,2.5,7.7,2.4c0.5,0,5.9-0.3,6.6-2.7
-	C118.6,73.6,115.6,70.8,112.5,70.3z"/>
+<path class="st0" d="M101,118.6c0,1.3,10.3,0,13,0c13,0,31,0,36,0c6-5,9-8,16-15c0-11,1-45,0-59c-18-1-37-1-44-1c0,0-21,22-21,22
+	c0,6,0,13.4,0,15.6c0,4.2,0,13.5,0,19.4C101,101.5,101,117.6,101,118.6z"/>
 </svg>
