@@ -11,7 +11,7 @@ body {
 .circle{
     height: 100px;
     width: 300px;
-    margin: 30px;
+    margin-left: -150px;
 }
 
 .test {
