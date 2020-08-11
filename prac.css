@@ -9,10 +9,11 @@ body {
     width: auto;
 }
 .circle{
-    height: 100px;
-    width: 300px;
-    margin-left: -150px;
+    height: 200px;
+    width: 500px;
+    margin-left: -400px;
 }
+
 
 .test {
     margin-top:  300px;
