@@ -1,6 +1,6 @@
 $(function () {
 
-    const BASE_TIME = 1053;
+    const BASE_TIME = 900;
 
     const CELL_FORM =[
         //_a shapes
@@ -58,68 +58,51 @@ $(function () {
             this.duration = BASE_TIME;
 
             this.move = anime.timeline({
+                // easing: 'easeOutQuad',
+                easing: 'cubicBezier(.5, .05, .1, .3)',
                 duration: this.duration,
-                easing: 'easeOutQuad',
                 // easing: 'steps(7)',
-                // complete: function() {this.restart();}
+                complete: function() {this.restart();}
             });
 
+            //i only did this because i just wanted to have a var name is igbo let me b
             this.biakota = 
             {
                 targets: this.container,
-                // keyframes: [ 
-                //     {translateX: this.directionx,
-                //     translateY: this.directiony,},
-                //     {translateX: 0,
-                //         translateY: 0, delay: 5000}
-
-
-                // ],
- 
                 translateX: this.directionx,
                 translateY: this.directiony,
-                // direction: 'alternate',
-                // delay: 2000,
-                duration: this.duration,
-                // loop: true
+                delay: 1000, 
             };
-            this.anime = 
-            anime({
-                targets: this.shape,
-                d: [{value: this.d[0]}, {value: this.d[1] }],
-                // easing: 'easeOutQuad',
-                // easing: 'steps(7)',
-                easing: 'cubicBezier(.5, .05, .1, .3)',
-                // easing: 'linear',
-                direction: 'alternate',
-                // delay: 500,
-                duration: this.duration * 2,
-                // elasticity: 200,
-                // loop: true
-            });
 
             this.move.add(this.biakota)
             .add({
                 targets: this.shape,
-                // fill: '#1a34f2',
-                // duration: 8000
-            })
-            // .add({
-            //     targets: this.shape,
-            //     // fill: '#000000',
-            //     // duration: 500
-            // })
+                d: [ 
+                    {value: this.d[0], duration: (this.duration * 3) / 5}, 
+                    {value: this.d[1], duration: (this.duration * 2) / 5}
+                ]
+            }, '-=' + this.duration.toString())
             .add({
                 targets: this.container,
+                delay: this.duration * 2,
                 translateX: 0,
                 translateY: 0,
-                // duration: this.duration
             })
-
+            .add({
+                targets: this.shape,
+                d: [ 
+                    {value: this.d[0]}, 
+                    {value: this.orig}
+                ]
+            }, '-=' + this.duration.toString())
+            
             
 			// this.DOM.el.addEventListener('touchstart', this.mouseenterFn);
-			// this.DOM.el.addEventListener('touchend', this.mouseleaveFn);
-
+            // this.DOM.el.addEventListener('touchend', this.mouseleaveFn);
+            
+            //this function to call onhover event listners on this.shape or container, havent decided
+            //may not even want to have on hover effect on a moving object at all
+            //cuz you can't techinically hover over moving objects
             this.animate();
             
         }
@@ -131,7 +114,7 @@ $(function () {
             return CELL_FORM[n];
         }
 
-        findX() {
+        findX() { // return x distance from prime meridian of container that holds all SVGS
             let dist = prm_mrdn - this.pos.left
             if (this.pos.left < prm_mrdn) { 
                 return dist - (this.pos.width / 2) 
@@ -139,7 +122,7 @@ $(function () {
             else { return dist - (this.pos.width / 2) }
         }
 
-        findY() {
+        findY() { //return y distance from equator of container that holds all SVGS
             let trueY = this.pos.top + window.scrollY; //becuz this.top changes relative to viewport aka changes on scroll
             let dist = eqtr - trueY
             if (trueY < eqtr) { 
@@ -152,7 +135,8 @@ $(function () {
 
 
         
-
+        //probably gonna take this out make make curcles just form data bricks
+        //the way i hanfdle onhover is too jank
         to_c() {
 
             anime({
@@ -164,7 +148,6 @@ $(function () {
         }
 
         from_c() {
-            // this.anime.play();
             // this.move.play();
             
 
@@ -177,16 +160,9 @@ $(function () {
 
         
 
-        animate() {
-            this.move.add({
-                // targets: this.shape,
-                // fill: '#123412'
-
-            })
-            
+        animate() {            
             this.move.play();
-            // this.anime.play();
-            
+
             // this.shape.addEventListener('mouseenter', this.to_c.bind(this));
 			// this.shape.addEventListener('mouseleave', this.from_c.bind(this));
         }
@@ -234,14 +210,12 @@ $(function () {
     //     function () {
     //         $(shapes).each( function() {
     //             this.move.pause();
-    //             this.anime.pause();
     //         })
     //         $(this).addClass("data")
     //     },
 
     //     function () {
     //         $(shapes).each( function() {
-    //             this.anime.play();
     //             this.move.play();
     //         })
     //         $(this).removeClass("data")
@@ -251,15 +225,6 @@ $(function () {
     // console.log("The items")
     // console.log(items)
     console.log(shapes);
-
-    anime({
-        targets: '.dot',
-        opacity: [1, 0, 0],
-        direction: 'alternate',
-        easing: 'easeInOutElastic',
-        duration: (BASE_TIME * 2),
-        loop: true
-    })
 
 
 
