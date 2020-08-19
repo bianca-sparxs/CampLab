@@ -48,9 +48,15 @@ body {
     margin-top: 100px;
 }
 
-/* .dot {
-    animation: disappear 16s ease infinite;
-} */
+#two {
+    position: relative;
+    z-index: 100;
+}
+
+.b1, .b2, .f1 {
+    display: none;
+    /* animation: disappear 16s ease infinite; */
+}
 
 @keyframes dissappear {
     0%{opacity: 1;}

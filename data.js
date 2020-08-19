@@ -1,3 +1,6 @@
+//TODO!!! TAKE OUT ALL THE SVGS
+//dude you can literally just have one svg element and call the translate code on the paths, but like
+//dang refactoring code tho :<
 $(function () {
 
     const BASE_TIME = 1200;
@@ -83,7 +86,7 @@ $(function () {
             }, '-=' + this.duration.toString())
             .add({
                 targets: this.container,
-                delay: this.duration * 4.5,
+                delay: this.duration * 2.5,
                 translateX: 0,
                 translateY: 0,
                 translateZ: 0,
