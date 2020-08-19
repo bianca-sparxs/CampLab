@@ -1,9 +1,9 @@
-//TODO!!! TAKE OUT ALL THE SVGS
-//dude you can literally just have one svg element and call the translate code on the paths, but like
-//dang refactoring code tho :<
 $(function () {
-
-    const BASE_TIME = 1200;
+    //the idea behind is BASE_TIME is x = 1.707s where 4x = x^2 + 2x + 0.5
+    //becoz the gradient transitions in index.html are 4parts, all equally timed
+    //and the js animation is a 500ms delay + transtion time x + delay of x^2 + returning back transition time x animation
+    //this doesnt reaaly work tho lol
+    const BASE_TIME = 1707;
 
     const CELL_FORM =[
         //_a shapes bottom left
@@ -31,9 +31,7 @@ $(function () {
             "M255.6,197.3c5.9-6,5.7-15.7-0.3-21.6c-3.5-3.4-8.5-4.3-10.6-4.3c-4.2,0-7.2,1.6-10,3.7c-5.1,3.8,5.1-42.5-3.1-50.6c-6-5.9-46.3,74.6-52.2,80.7c-3.5,3.6-13.5,14.9-12.8,19.5l0,0c2.4,15.1-20.2,43.7-35.2,46.1l0,0c-3.2,0.5-21.8,19.9-24.2,22.4c-5.9,6-5.7,10.9,0.4,16.8c3,2.9-29.7,47.3-25.8,47.3l0,0c15.3-0.2,43.4,0,59.1-2.1c12.8-2,24-15.3,27.2-12.1c5.9,5.7,15.3,5.6,21.1-0.3c2.2-2.3,3.6-5.2,4-8.1c0.8-5.5,4.1-8.2,9.4-7.6c5.6,2.5,12.3,1.5,16.8-3.2c5-5.1,5.5-12.9,1.7-18.6c-6.3-13.4-2.8-23.2,10.5-29.8c0.2-0.1,6.9-2.6,8.6-11.1c1.1-6-1.9-10.6-2-10.7c0,0,12.1-21,12.1-21c-7.5-13.2-11.2-24.8,1.7-32.7c0,0,1.5-1.4,1.5-1.4C255.3,197.7,255.2,197.6,255.6,197.3z",
             "M253.6,198.4c0.3-2.8-1.2-12.5-2.5-17.6c-1.1-4.3-2-9.3-2.6-11.3c-1-3.2-3-8.8-4-12.2c-1.4-5-7.4-31.7-15.6-39.8c-6.4,10.3-45.8,80.1-49.6,87.6c-2.7,5.3-8.7,15-12.6,22l0,0c-7,12.4-21.7,38.6-27.3,48.4l-6.4,11.6c-2.8,4.7-6.1,10.8-7.7,13.7c-1,1.7-2.8,4.7-7.1,12.3c-5.1,9.3-15.4,27.8-29.6,53l0.2,0.1c21.7,1,41.7-5.7,55.4-10.6c12.6-4.5,22.4-12.1,23.9-12.6c1.3-0.4,13.3-10.1,15.3-11.6c3.4-2.4,4.7-3.7,7.1-5.7c4.1-3.1,5.4-3.8,7.5-5.4c3-2.6,5.1-4.5,9.1-8.6c5.1-5,7.4-6.2,11.1-10.4c9.1-8.4,15.4-17.3,18.1-23.8c0.1-0.2,4-5.7,8.1-13.6c1.5-3.1,3.4-9.9,3.3-10c0,0,4.8-17.4,4.8-17.5c1.5-6.9,0.1-11,1.4-20.9c0,0,0,0,0,0C255.6,214.8,253.6,198.9,253.6,198.4z"
         ],
-
-        ]
-
+    ]
 
     class Shape {
 
@@ -44,11 +42,6 @@ $(function () {
             this.shape = path;
             this.pos = this.container.getBoundingClientRect();
             // console.log(this.pos)
-
-            //c_shapes are the completed shape that the svg path will morph into;
-            // list[0] = data, list[1] = data_b
-            this.c_shape_list = [ "m 87.5,20.4L60.6,66.9l-27.8,48.4l36.4-0.1l58.6-0.4l0-94.3h-21.8H87.5z", "M101,118.6c0,1.3,10.3,0,13,0c13,0,31,0,36,0c6-5,9-8,16-15c0-11,1-45,0-59c-18-1-37-1-44-1c0,0-21,22-21,22c0,6,0,13.4,0,15.6c0,4.2,0,13.5,0,19.4C101,101.5,101,117.6,101,118.6z"];
-            this.c_shape = this.setCshapes(n);
             this.d = this.setForms(n);
 
             this.directionx = this.findX();
@@ -56,13 +49,11 @@ $(function () {
             // console.log("moving x is: " + this.directionx.toString() + " moving y is: " + this.directiony.toString())
 
             this.duration = BASE_TIME;
+            console.log(Math.pow(this.duration, 2)* 0.001)
 
             this.move = anime.timeline({
                 easing: 'easeInOutQuad',
-                // easing: 'linear',
                 duration: this.duration,
-                delay: anime.stagger(100),
-                // easing: 'steps(7)',
                 complete: function() {this.restart();}
             });
 
@@ -86,7 +77,7 @@ $(function () {
             }, '-=' + this.duration.toString())
             .add({
                 targets: this.container,
-                delay: this.duration * 2.5,
+                delay: Math.pow(this.duration, 2) * 0.001,
                 translateX: 0,
                 translateY: 0,
                 translateZ: 0,
@@ -111,9 +102,6 @@ $(function () {
             
         }
 
-        setCshapes(n) {
-            return this.c_shape_list[n];
-        }
         setForms(n) {
             return CELL_FORM[n];
         }
@@ -135,45 +123,34 @@ $(function () {
             else { return dist - (this.pos.height / 2) }
         } 
 
-
-
-
-        
-        //probably gonna take this out make make curcles just form data bricks
-        //the way i hanfdle onhover is too jank
-        to_c() {
+        to_sq() {
 
             anime({
-                targets: this.shape,
-                d: this.c_shape,
-                duration: 3000,
-                // changeBegin: function(anim) { this.move.pause()}
+                targets: ".dot",
+                rx: "0",
+                duration: 2000,
             })
         }
 
-        from_c() {
-            // this.move.play();
-            
-
+        from_sq() {
             anime({
-                // targets: this.shape,
-                // d: this.orig,
-                // duration: 200,
+                targets: ".dot",
+                rx: "50",
+                duration: 2000,
             })
         }
 
         
 
         animate() {            
-            this.move.play();
-
-            // this.shape.addEventListener('mouseenter', this.to_c.bind(this));
-			// this.shape.addEventListener('mouseleave', this.from_c.bind(this));
+            this.container.addEventListener('mouseenter', this.to_sq.bind(this));
+			this.container.addEventListener('mouseleave', this.from_sq.bind(this));
         }
 
         
     }
-    // console.log($('.cir'));
+    console.log($('.cir'));
+
 
     
 
@@ -183,7 +160,7 @@ $(function () {
     let items = $('.point'); //the specific SVG paths, not the container that holds it
     let counter = 0;
 
-    //TODO: do jquery, on resize, calculate eath prime merdian and equator
+    //TODO: do jquery, on resize, calculate eath prime merdian and equator, race condition
     let earth = $('.container').get(0).getBoundingClientRect() //container holding all the SVG elements
     let eqtr = (earth.height + (earth.top + window.scrollY)) / 2;
     let prm_mrdn =  earth.left + (earth.width / 2);
@@ -210,21 +187,7 @@ $(function () {
         
     });
 
-    // $('.cir').hover (
-    //     function () {
-    //         $(shapes).each( function() {
-    //             this.move.pause();
-    //         })
-    //         $(this).addClass("data")
-    //     },
 
-    //     function () {
-    //         $(shapes).each( function() {
-    //             this.move.play();
-    //         })
-    //         $(this).removeClass("data")
-    //     }
-    // )
 
     // console.log("The items")
     // console.log(items)

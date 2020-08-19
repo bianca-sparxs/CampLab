@@ -54,7 +54,7 @@ body {
 }
 
 .b1, .b2, .f1 {
-    display: none;
+    /* display: none; */
     /* animation: disappear 16s ease infinite; */
 }
 
