@@ -1,9 +1,13 @@
-$(function () {
+$(document).ready( function () {
     //the idea behind is BASE_TIME is x = 1.707s where 4x = x^2 + 2x + 0.5
     //becoz the gradient transitions in index.html are 4parts, all equally timed
-    //and the js animation is a 500ms delay + transtion time x + delay of x^2 + returning back transition time x animation
+    //and the js animation is a [ 500ms delay + transtion time x + delay of x^2 + returning-back transition time x ] animation
     //this doesnt reaaly work tho lol
     const BASE_TIME = 1707;
+
+    let counter = 0;
+    let eqtr = 0;
+    let prm_mrdn = 0;
 
     const CELL_FORM =[
         //_a shapes bottom left
@@ -33,73 +37,22 @@ $(function () {
         ],
     ]
 
-    class Shape {
-
-        //takes in the path of each SVG, which cshape in the array it is
+    class Shape { //takes in the path of each SVG
         constructor(path, n) {
+            console.log(eqtr);
             this.container = path.parentNode;
             this.orig = path.getAttribute("d").toString();
             this.shape = path;
             this.pos = this.container.getBoundingClientRect();
             // console.log(this.pos)
             this.d = this.setForms(n);
-
             this.directionx = this.findX();
             this.directiony = this.findY();
             // console.log("moving x is: " + this.directionx.toString() + " moving y is: " + this.directiony.toString())
-
             this.duration = BASE_TIME;
-            console.log(Math.pow(this.duration, 2)* 0.001)
+            // console.log(Math.pow(this.duration, 2)* 0.001)
 
-            this.move = anime.timeline({
-                easing: 'easeInOutQuad',
-                duration: this.duration,
-                complete: function() {this.restart();}
-            });
-
-            //i only did this because i just wanted to have a var name is igbo let me b
-            this.biakota = 
-            {
-                targets: this.container,
-                translateX: this.directionx,
-                translateY: this.directiony,
-                translateZ: 0,
-                delay: 500, 
-            };
-
-            this.move.add(this.biakota)
-            .add({
-                targets: this.shape,
-                d: [ 
-                    {value: this.d[0], duration: (this.duration * 3) / 5}, 
-                    {value: this.d[1], duration: (this.duration * 2) / 5}
-                ]
-            }, '-=' + this.duration.toString())
-            .add({
-                targets: this.container,
-                delay: Math.pow(this.duration, 2) * 0.001,
-                translateX: 0,
-                translateY: 0,
-                translateZ: 0,
-
-            })
-            .add({
-                targets: this.shape,
-                d: [ 
-                    {value: this.d[0]}, 
-                    {value: this.orig}
-                ]
-            }, '-=' + this.duration.toString())
-            
-            
-			// this.DOM.el.addEventListener('touchstart', this.mouseenterFn);
-            // this.DOM.el.addEventListener('touchend', this.mouseleaveFn);
-            
-            //this function to call onhover event listners on this.shape or container, havent decided
-            //may not even want to have on hover effect on a moving object at all
-            //cuz you can't techinically hover over moving objects
             this.animate();
-            
         }
 
         setForms(n) {
@@ -127,7 +80,7 @@ $(function () {
 
             anime({
                 targets: ".dot",
-                rx: "0",
+                rx: '0',
                 duration: 2000,
             })
         }
@@ -135,69 +88,93 @@ $(function () {
         from_sq() {
             anime({
                 targets: ".dot",
-                rx: "50",
+                rx: '50',
                 duration: 2000,
             })
         }
 
-        
+        animate() { 
+            let move = anime.timeline({
+                easing: 'easeInOutQuad',
+                duration: this.duration,
+                complete: function() {this.restart();}
+            });
 
-        animate() {            
+            //i only did this because i just wanted to have a var name is igbo let me b
+            let biakota = 
+            {
+                targets: this.container,
+                translateX: this.directionx,
+                translateY: this.directiony,
+                translateZ: 0,
+                delay: 500, 
+            };
+
+            move.add(biakota)
+            .add({
+                targets: this.shape,
+                d: [ 
+                    {value: this.d[0], duration: (this.duration * 3) / 5}, 
+                    {value: this.d[1], duration: (this.duration * 2) / 5}
+                ]
+            }, '-=' + this.duration.toString())
+            .add({
+                targets: this.container,
+                delay: Math.pow(this.duration, 2) * 0.001,
+                translateX: 0,
+                translateY: 0,
+                translateZ: 0,
+
+            })
+            .add({
+                targets: this.shape,
+                d: [ 
+                    {value: this.d[0]}, 
+                    {value: this.orig}
+                ]
+            }, '-=' + this.duration.toString())
+            
+            
             this.container.addEventListener('mouseenter', this.to_sq.bind(this));
-			this.container.addEventListener('mouseleave', this.from_sq.bind(this));
+            this.container.addEventListener('mouseleave', this.from_sq.bind(this));
+            this.container.addEventListener('touchstart', this.to_sq.bind(this));
+            this.container.addEventListener('touchend', this.to_sq.bind(this));
         }
-
-        
+  
     }
     console.log($('.cir'));
 
+    //bido is start in igbo; again, let me be
+   function bido() {
+        let shapes = [];
+        let items = $('.point'); //the specific SVG paths, not the container that holds it
+        let earth = $('.container').get(0).getBoundingClientRect() //container holding all the SVG elements
+        eqtr = (earth.height + (earth.top + window.scrollY)) / 2;
+        console.log(eqtr);
+        prm_mrdn =  earth.left + (earth.width / 2);
 
-    
+        items.each( function() {
+            let obj = new Shape(this, counter)
+            shapes.push(obj);
+            counter++;
+        });
+    }
 
-
-
-    let shapes = [];
-    let items = $('.point'); //the specific SVG paths, not the container that holds it
-    let counter = 0;
-
-    //TODO: do jquery, on resize, calculate eath prime merdian and equator, race condition
-    let earth = $('.container').get(0).getBoundingClientRect() //container holding all the SVG elements
-    let eqtr = (earth.height + (earth.top + window.scrollY)) / 2;
-    let prm_mrdn =  earth.left + (earth.width / 2);
+    bido();
+    $(window).on("resize", function () {
+        let earth = $('.container').get(0).getBoundingClientRect() //container holding all the SVG elements
+        eqtr = (earth.height + (earth.top + window.scrollY)) / 2;
+        console.log(prm_mrdn);
+        prm_mrdn =  Math.ceil(earth.left + (earth.width / 2));
+    })    
     
     // console.log("the earth");
     // console.log(earth)
 
-    // console.log(window.scrollY)
-
-
-
     // console.log(" prime meridian is " + prm_mrdn.toString() + " and equator is " + eqtr.toString())
-    // let check = earth.right - $('.container').height() / 2;
-    // console.log("apprx prm mer is: " + check.toString())
-
-    
-
-    items.each( function() {
-        // console.log(counter)
-        // console.log(this.getBoundingClientRect())
-        let obj = new Shape(this, counter)
-        shapes.push(obj);
-        counter++
-        
-    });
-
-
 
     // console.log("The items")
     // console.log(items)
     // console.log(shapes);
-
-
-
-
-
-    //problem with this probably you want a div to chnage shape when actually
-    //you should have a svg inside the div and animate that
 
 })
