@@ -55,6 +55,7 @@ $(function () {
 
             this.directionx = this.findX();
             this.directiony = this.findY();
+            this.end = new Date();
             // console.log("moving x is: " + this.directionx.toString() + " moving y is: " + this.directiony.toString())
 
             this.duration = BASE_TIME;
@@ -65,7 +66,7 @@ $(function () {
                 duration: this.duration,
                 delay: anime.stagger(100),
                 // easing: 'steps(7)',
-                complete: function() {this.restart();}
+                complete: function() {this.restart(); console.log(this.end)}
             });
 
             //i only did this because i just wanted to have a var name is igbo let me b
@@ -202,7 +203,6 @@ $(function () {
     // console.log("apprx prm mer is: " + check.toString())
 
     
-
     items.each( function() {
         // console.log(counter)
         // console.log(this.getBoundingClientRect())
@@ -238,5 +238,6 @@ $(function () {
 
     //problem with this probably you want a div to chnage shape when actually
     //you should have a svg inside the div and animate that
+
 
 })
