@@ -3,116 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src = "./data.js"></script>
     
     <script src="anime.min.js"></script>
-    <script src="test.js"> </script>
     <link rel="stylesheet" type="text/css" href="prac.css"/>
 </head>
 <body>
     <div class="biguy">
         <div class="hero"><h1 class="herotext">Campbell Lab</h1><p> Lorem ipsum something something dolor et il at veniat</p></div>
         <div class="container">
+            <!-- Shape One - Bottom Left -->
             <div id="one" class="circle lilshift">
                 <!-- animating gradient code: -->
-                <!-- <linearGradient id="SVGID_1" gradientUnits="userSpaceOnUse" x1="143.8157" y1="114.5995" x2="117.368" y2="68.7908">
-                    <stop  offset="0" stop-color="#D3D1A1"> 
-                        <animate attributeName="stop-color" values="#4059ad; #6b9ac4; #4059ad" dur="8s" repeatCount="indefinite"/>
-                    </stop>
-                    <stop  offset="1" stop-color="#65C8D0">
-                        <animate attributeName="stop-color" values="#97d8c4; #f4b942; #97d8c4" dur="8s" repeatCount="indefinite"/>
-                    </stop>
-                </linearGradient> -->
+
 
                 <svg class="cir" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 563.9 518.6" style="enable-background:new 0 0 563.9 518.6;" xml:space="preserve">
                     <style type="text/css">
-                        .st0{fill:url(#SVGID_1_);}
+                        .a0{fill:url(#SVGID_1);}
                     </style>
-                <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="391.0189" y1="173.4618" x2="-22.873" y2="73.4507" gradientTransform="matrix(1 0 0 -1 0 526.9619)">
-                    <stop  offset="0.274" style="stop-color:#5699C0"/>
-                    <stop  offset="0.3293" style="stop-color:#669CB4"/>
-                    <stop  offset="0.5647" style="stop-color:#A7A782"/>
-                    <stop  offset="0.7629" style="stop-color:#D7AF5E"/>
-                    <stop  offset="0.9139" style="stop-color:#F4B447"/>
-                    <stop  offset="1" style="stop-color:#FFB63F"/>
-                </linearGradient>
-            <path class="point st0" d="M225.7,372.8c-12.4-25.5-42.9-36.1-68.3-23.7c-6.8,3.3-12.5,8-17.1,13.5l0,0c-11.8,14.4-16.1,16.1-34.5,13.7
+
+                    <radialGradient id="SVGID_1" cx="115.2107" cy="424.9259" r="193.7009" fx="68.5459" fy="443.4514" gradientTransform="matrix(0.9992 3.900232e-02 -3.472989e-02 0.8898 14.8453 42.3421)" gradientUnits="userSpaceOnUse">
+                        <stop  offset="0" style="stop-color:#00016F">
+                        <animate attributeName="stop-color" values="#4059ad; #00016F; #00016F; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                        </stop>
+
+                        <stop  offset="0.1778" style="stop-color:#0F0B70">
+                        <animate attributeName="stop-color" values="#4059ad; #0F0B70; #0F0B70; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                        </stop>
+
+                        <stop  offset="0.3915" style="stop-color:#201772">
+                        <animate attributeName="stop-color" values="#4059ad; #201772; #201772; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                        </stop>
+
+                        <stop  offset="0.5055" style="stop-color:#2C2070">
+                        <animate attributeName="stop-color" values="#4059ad; #2C2070; #2C2070; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                        </stop>
+
+                        <stop  offset="0.5586" style="stop-color:#33256F">
+                        <animate attributeName="stop-color" values="#4059ad; #33256F; #33256F; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                        </stop>
+
+                        <stop  offset="0.9119" style="stop-color:#855160">
+                        <animate attributeName="stop-color" values="#4059ad; #855160; #855160; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                        </stop>
+
+                    </radialGradient>
+
+ 
+   
+            <path class="point a0" d="M225.7,372.8c-12.4-25.5-42.9-36.1-68.3-23.7c-6.8,3.3-12.5,8-17.1,13.5l0,0c-11.8,14.4-16.1,16.1-34.5,13.7
                     l0,0c-9.5-1.2-19.5,0.2-28.8,4.8c-25.4,12.4-35.9,43.2-23.6,68.7c12.4,25.5,42.9,36.1,68.3,23.7c6.8-3.3,12.5-8,17.1-13.5l0,0
                     c11.8-14.4,16.1-16.1,34.5-13.7l0,0c9.5,1.2,19.5-0.2,28.8-4.8C227.5,429.1,238,398.3,225.7,372.8z"/>
                 </svg>
             </div>
-
+            <!-- Shape Two - Bottom Right -->
             <div id="two" class="circle">
                 <svg class="cir" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 563.9 518.6" style="enable-background:new 0 0 563.9 518.6;" xml:space="preserve">
                 <style type="text/css">
-                    .two{fill:url(#SVGID_2);}
-                    .cir1{fill:#808080;}
-                    .cir2{fill:#DCA1C8;}
-                    .cir3{fill:#eff2f1;}
+                    .b0{fill:url(#SVGID_2);}
+                    .b1{fill:#e32; mix-blend-mode: exclusion;}
+                    .b2{fill:#eff2f1;}
                 </style>
-                <linearGradient id="SVGID_2" gradientUnits="userSpaceOnUse" x1="149.4803" y1="479.2263" x2="9.0301" y2="513.1641">
-                    <stop  offset="0.274" style="stop-color:#5699C0"/>
-                    <stop  offset="0.3293" style="stop-color:#669CB4"/>
-                    <stop  offset="0.5647" style="stop-color:#A7A782"/>
-                    <stop  offset="0.7629" style="stop-color:#D7AF5E"/>
-                    <stop  offset="0.9139" style="stop-color:#F4B447"/>
-                    <stop  offset="1" style="stop-color:#FFB63F"/>
-                </linearGradient>
-                <path class="cir1" d="M14.2,497.1c27.9-0.5,58.2,0.1,83,0c7.4,0,32.1-0.1,39.4,0"/>
-                <path class="point two" d="M503.5,371.9c-15.9-3.9-90.9-68.6-98.1-88.5c-2.3-6.8-9-11.3-16.4-10.5c-8.5,1-14.6,8.6-13.7,17.1
+                <radialGradient id="SVGID_2" cx="430.8015" cy="330.5388" r="128.5787" gradientTransform="matrix(1 0 0 1 0 -33.0381)" gradientUnits="userSpaceOnUse">
+                    <stop  offset="0" style="stop-color:#00016F">
+                    <animate attributeName="stop-color" values="#4059ad; #00016F; #00016F; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                    </stop>
+
+                    <stop  offset="0.1778" style="stop-color:#0F0B70">
+                    <animate attributeName="stop-color" values="#4059ad; #0F0B70; #0F0B70; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                    </stop>
+            
+                    <stop  offset="0.2498" style="stop-color:#150F71">
+                        <animate attributeName="stop-color" values="#4059ad; #150F71; #150F71; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                    </stop>
+
+                    <stop  offset="0.3915" style="stop-color:#201772">
+                        <animate attributeName="stop-color" values="#4059ad; #201772; #201772; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+
+                    </stop>
+
+                    <stop  offset="0.5055" style="stop-color:#2C2070">
+                        <animate attributeName="stop-color" values="#4059ad; #2C2070; #2C2070; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                    </stop>
+
+                    <stop  offset="0.5586" style="stop-color:#33256F">
+                        <animate attributeName="stop-color" values="#4059ad; #33256F; #33256F; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+
+                    </stop>
+                    <stop  offset="0.9119" style="stop-color:#855160">
+                        <animate attributeName="stop-color" values="#4059ad; #855160; #855160; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                    </stop>
+                </radialGradient>
+                <path class="b1" d="M14.2,497.1c27.9-0.5,58.2,0.1,83,0c7.4,0,32.1-0.1,39.4,0"/>
+                <path class="point b0" d="M503.5,371.9c-15.9-3.9-90.9-68.6-98.1-88.5c-2.3-6.8-9-11.3-16.4-10.5c-8.5,1-14.6,8.6-13.7,17.1
                     c0.3,2.4,1.1,4.6,2.3,6.5c10.9,18.3,22.7,107,2.6,147.4c-2.9,5.7-4.3,12.2-3.5,19c2.1,18.3,18.6,31.5,36.9,29.5
                     c14.5-1.6,25.7-12.3,28.8-25.7c11.1-43.4,46.8-67.1,62-72.1c5.3-1.6,8.9-6.9,8.2-12.6C512.2,376.9,508.4,372.9,503.5,371.9z"/>
-                <circle class="cir2" cx="390.8" cy="288.3" r="15.5"/>
-                <circle class="cir2" cx="501.1" cy="383.4" r="11.8"/>
-                <circle class="c1" cx="444.1" cy="414.1" r="11.8"/>
-                <circle class="c1" cx="410" cy="459.3" r="33.4"/>
-                <path class="cir3" d="M450.5,347.5c0.6,8.8-25.8,34.5-34.6,35.1c-8.8,0.6-13.5-24.1-14.1-32.9s6.1-16.4,15-17
+                <circle class="b1" cx="390.8" cy="288.3" r="15.5"/>
+                <circle class="b1" cx="501.1" cy="383.4" r="11.8"/>
+                <circle class="b1" cx="444.1" cy="414.1" r="11.8"/>
+                <circle class="b1" cx="410" cy="459.3" r="33.4"/>
+                <path class="b2" d="M450.5,347.5c0.6,8.8-25.8,34.5-34.6,35.1c-8.8,0.6-13.5-24.1-14.1-32.9s6.1-16.4,15-17
                     C425.6,332.1,449.9,338.7,450.5,347.5z"/>
                 </svg>
             </div>
-
+            <!-- Shape Three - Landlock -->
             <div id="three" class="circle test">
                 <svg class="cir" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px" viewBox="0 0 563.9 518.6" style="enable-background:new 0 0 563.9 518.6;" xml:space="preserve">
                 <style type="text/css">
-                    .c0{fill:#808080;}
-                    .c1{fill:#DCA1C8; mix-blend-mode: screen;}
+                    .c0{fill:url(#SVGID_3);}
+                    .c1{fill:#eff2f1; mix-blend-mode: difference;}
                 </style>
+                <radialGradient id="SVGID_3" cx="163.5043" cy="388.0176" r="139.5202" fx="110.42" fy="382.3303" gradientTransform="matrix(0.9905 -0.1374 9.017298e-02 0.6503 -33.439 158.1542)" gradientUnits="userSpaceOnUse">
+                    <stop  offset="0" style="stop-color:#00016F">
+                        <animate attributeName="stop-color" values="#4059ad; #00016F; #00016F; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                    </stop>
+                    <stop  offset="0.1778" style="stop-color:#0F0B70">
+                        <animate attributeName="stop-color" values="#4059ad; #0F0B70; #0F0B70; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                    </stop>
+                    <stop  offset="0.3915" style="stop-color:#201772">
+                        <animate attributeName="stop-color" values="#4059ad; #201772; #201772; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                    </stop>
+                    <stop  offset="0.5055" style="stop-color:#2C2070">
+                        <animate attributeName="stop-color" values="#4059ad; #2C2070; #2C2070; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                    </stop>
+                    <stop  offset="0.5586" style="stop-color:#33256F">
+                        <animate attributeName="stop-color" values="#4059ad; #33256F; #33256F; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                    </stop>
+                    <stop  offset="0.9119" style="stop-color:#855160">
+                        <animate attributeName="stop-color" values="#4059ad; #855160; #855160; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                    </stop>
+                </radialGradient>
+
                 <path class="point c0" d="M374.8,364.6c-1.5-8-8.3-13.7-16-14.2l0,0c-6.2-0.4-13.4-3.8-11.9-27.3c0.4-5.7,0.1-11.6-1-17.5
                 c-4.5-24.1-21.3-42.7-42.7-50.7c-33.4-12.6-30.1-27.5-26.8-36.3l0,0c1.1-2.9,1.5-6.1,0.8-9.4c-1.8-9.5-10.9-15.8-20.5-14
                 c-9.5,1.8-15.8,10.9-14,20.5c0.6,3.3,2.1,6.1,4.2,8.5l0,0c6.2,7,14.7,19.7-11.8,43.5c-17,15.2-26,38.6-21.4,62.7
                 c6,32.1,34,54.6,65.5,54.9c33.3,0.4,35.6,13.9,35.5,22.6c0,0,0,0.1,0,0.1c0,0,0,0,0,0l0,0c0,1.1,0.1,2.3,0.3,3.4
                 c1.8,9.5,10.9,15.8,20.5,14c9.5-1.8,15.8-10.9,14-20.5c0-0.2-0.1-0.5-0.2-0.7l0,0c-2.6-11.2,1-16.9,12.2-19.4l0,0
                 C370.6,382.8,376.6,373.9,374.8,364.6z"/>
-                <ellipse transform="matrix(0.998 -6.288726e-02 6.288726e-02 0.998 -12.8485 16.7731)" class="c1" cx="260" cy="212.5" rx="17.5" ry="17.5"/>
-                <!-- <circle class="c1" cx="279.8" cy="318" r="67.3"/> -->
+                <rect class="dot c1" rx="50" x="242.5" y="195" height="35" width="35"/> 
                 <circle class="c1" cx="357.6" cy="367.8" r="17.5"/>
                 <circle class="c1" cx="332.2" cy="408.3" r="17.5"/>
                 </svg>
             </div>
-<!-- 
-            <div id="four" class="circle">
-                <svg class="cir" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                        viewBox="0 0 563.9 518.6" style="enable-background:new 0 0 563.9 518.6;" xml:space="preserve">
-                <style type="text/css">
-                    .d1{fill:#DCA1C8;}
-                </style>
-                <path class="point d1" d="M435.3,283.2c-15.1-14.7-37.1-17.9-55.1-9.8c-17.5,7.3-20.4,2.5-21.2,1.1c-0.1-0.2-0.3-0.4-0.5-0.6
-                c-1.1-1.1-2.8-1-3.9,0.1c-1.1,1.1-1,2.8,0.1,3.9c0.2,0.2,0.4,0.4,0.7,0.5c1.4,0.8,6.2,3.6-0.6,21.3c-7.6,18.3-3.9,40.2,11.2,54.9
-                c19.7,19.2,51.2,18.8,70.4-0.9C455.4,333.9,455,302.4,435.3,283.2z"/>
-                </svg>
-            </div> -->
-
+            <!-- Shape Five - Pointy -->
             <div id="five" class="circle">
                 <svg class="cir" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 563.9 518.6" style="enable-background:new 0 0 563.9 518.6;" xml:space="preserve">
                 <style type="text/css">
-                    .e0{fill:#DCA1C8;}
+                    .e0{fill:url(#SVGID_5);}
                     .e1{fill:#eff2f1; mix-blend-mode: exclusion;}
                 </style>
+                <radialGradient id="SVGID_5" cx="422.6585" cy="275.9113" r="133.53" gradientUnits="userSpaceOnUse">
+                    <stop  offset="0" style="stop-color:#00016F">
+                        <animate attributeName="stop-color" values="#4059ad; #00016F; #00016F; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                    </stop>
+                    <stop  offset="0.1778" style="stop-color:#0F0B70">
+                        <animate attributeName="stop-color" values="#4059ad; #0F0B70; #0F0B70; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                    </stop>
+                    <stop  offset="0.3915" style="stop-color:#201772">
+                        <animate attributeName="stop-color" values="#4059ad; #201772; #201772; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                    </stop>
+                    <stop  offset="0.5055" style="stop-color:#2C2070">
+                        <animate attributeName="stop-color" values="#4059ad; #2C2070; #2C2070; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                    </stop>
+                    <stop  offset="0.5586" style="stop-color:#33256F">
+                        <animate attributeName="stop-color" values="#4059ad; #33256F; #33256F; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                    </stop>
+                    <stop  offset="0.9119" style="stop-color:#855160">                        
+                        <animate attributeName="stop-color" values="#4059ad; #855160; #855160; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                    </stop>
+                </radialGradient>
 
                     <path class="point e0" d="M445.1,63.8c-2.3,2-3.7,4.6-4.2,7.3l0-0.1c-1.8,10-13,21.9-21.4,29.2c-8.3,6.9-21.2,15.6-31.3,16.3
                         c-3.1-0.2-6.2,0.8-8.8,2.9c-5.2,4.4-5.8,12.2-1.4,17.5c4.4,5.2,12.2,5.8,17.5,1.4c2.5-2.2,4-5.1,4.3-8.2c2.4-9.8,13-21.1,21.2-28.2
@@ -122,21 +185,33 @@
 
                 </svg>
             </div>
-            
+            <!-- Shape Six - Sidey -->
             <div id="six" class="circle">
                 <svg class="cir" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 563.9 518.6" style="enable-background:new 0 0 563.9 518.6;" xml:space="preserve">
-                <style type="text/css">
-                    .f0{fill:#285428; fill:url(#SVGID_5);}
-                </style>
-                <radialGradient id="SVGID_5" cx="142.7444" cy="306.4474" r="103.7542" fx="82.809" fy="391.1391" gradientTransform="matrix(0.9983 -5.877106e-02 4.879535e-02 0.8288 -14.7065 60.845)" gradientUnits="userSpaceOnUse">
-                    <stop  offset="0" style="stop-color:#00016F"/>
-                    <stop  offset="0.1778" style="stop-color:#0F0B70"/>
-                    <stop  offset="0.3915" style="stop-color:#201772"/>
-                    <stop  offset="0.5055" style="stop-color:#2C2070"/>
-                    <stop  offset="0.5586" style="stop-color:#33256F"/>
-                    <stop  offset="0.9119" style="stop-color:#855160"/>
-                </radialGradient>
+                    <style type="text/css">
+                        .f0{fill:url(#SVGID_6);}
+                    </style>
+                    <radialGradient id="SVGID_6" cx="142.7444" cy="306.4474" r="103.7542" fx="82.809" fy="391.1391" gradientTransform="matrix(0.9983 -5.877106e-02 4.879535e-02 0.8288 -14.7065 60.845)" gradientUnits="userSpaceOnUse">
+                        <stop  offset="0" style="stop-color:#00016F">
+                            <animate attributeName="stop-color" values="#4059ad; #00016F; #00016F; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                        </stop>
+                        <stop  offset="0.1778" style="stop-color:#0F0B70">
+                            <animate attributeName="stop-color" values="#4059ad; #0F0B70; #0F0B70; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                        </stop>
+                        <stop  offset="0.3915" style="stop-color:#201772">
+                            <animate attributeName="stop-color" values="#4059ad; #201772; #201772; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                        </stop>
+                        <stop  offset="0.5055" style="stop-color:#2C2070">
+                            <animate attributeName="stop-color" values="#4059ad; #2C2070; #2C2070; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                        </stop>
+                        <stop  offset="0.5586" style="stop-color:#33256F">
+                            <animate attributeName="stop-color" values="#4059ad; #33256F; #33256F; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                        </stop>
+                        <stop  offset="0.9119" style="stop-color:#855160">
+                            <animate attributeName="stop-color" values="#4059ad; #855160; #855160; #4059ad" dur="6.828s" repeatCount="indefinite"/>
+                        </stop>
+                    </radialGradient>
                 
                 <path class="point f0" d="M189.4,161.9c5.9-6,5.7-15.7-0.3-21.6c-3.5-3.4-8.5-4.3-10.6-4.3c-4.2,0-7.2,1.6-10,3.7
                     c-5.1,3.8-37.1,4.5-45.3-3.6c-6-5.9-15.7-5.7-21.6,0.3c-3.5,3.6-4.8,8.4-4.1,13l0,0c2.4,15.1-36.1,67.8-51.2,70.1l0,0
@@ -144,24 +219,22 @@
                     c-0.2,4.3,1.3,8.6,4.6,11.8c5.9,5.7,15.3,5.6,21.1-0.3c2.2-2.3,3.6-5.2,4-8.1c0.8-5.5,4.1-8.2,9.4-7.6c5.6,2.5,12.3,1.5,16.8-3.2
                     c5-5.1,5.5-12.9,1.7-18.6c-6.3-13.4-2.8-23.2,10.5-29.8c0.2-0.1,6.9-2.6,8.6-11.1c1.1-6-1.9-10.6-2-10.7c0,0,0,0,0,0
                     c-7.5-13.2,0.9-45.7,13.8-53.7c0,0,0,0,0,0C187.6,163.7,189.1,162.2,189.4,161.9z"/>
-                <ellipse transform="matrix(0.8433 -0.5375 0.5375 0.8433 -118.4897 62.8743)" class="e1" cx="48.6" cy="234.6" rx="15.3" ry="15.3"/>
-                <ellipse transform="matrix(0.3698 -0.9291 0.9291 0.3698 -65.7913 197.1453)" class="e1" cx="112.4" cy="147.1" rx="15.3" ry="15.3"/>
-                <ellipse transform="matrix(0.7071 -0.7071 0.7071 0.7071 -154.8951 182.2092)" class="e1" cx="142.5" cy="278.1" rx="14.9" ry="14.9"/>
-                <circle class="e1" cx="178.4" cy="151.3" r="15.3"/>
-                <ellipse transform="matrix(0.7071 -0.7071 0.7071 0.7071 -113.3519 178.7258)" class="e1" cx="159.1" cy="226.2" rx="15.3" ry="15.3"/>
-                <ellipse transform="matrix(0.8031 -0.5959 0.5959 0.8031 -154.8964 125.3602)" class="e1" cx="112.2" cy="297" rx="14.9" ry="14.9"/>
-                <circle class="e1" cx="126.3" cy="219.1" r="15.3"/>
-                <circle class="e1" cx="138" cy="244.7" r="11.7"/>
-                <circle class="e1" cx="137.9" cy="198.8" r="5.6"/>
-                <circle class="e1" cx="133.1" cy="153.4" r="5.6"/>
-                <circle class="e1" cx="128.7" cy="162.8" r="3.5"/>
+                <rect class="dot e1" rx="50" x="33.3" y="219.3" height="30.6" width="30.6"></rect>
+                <rect class="dot e1" rx="50" x="97.1" y="131.8" height="30.6" width="30.6"></rect>
+                <rect class="dot e1" rx="50" x="127.6" y="263.2" height="29.8" width="29.8"></rect>
+                <rect class="dot e1" rx="50" cx="163.1" cy="136" r="30.6"/>
+                <rect class="dot e1" rx="50" x="143.8" y="210.9" height="30.6" width="30.6"></rect>
+                <rect class="dot e1" rx="50" x="97.3" y="282.1" height="29.8" width="29.8"/>
+                <rect class="dot e1" rx="50" x="111" y="203.8" height="30.6" width="30.6"></rect>
+                <rect class="dot e1" rx="50" x="126.3" y="233" height="23.4" width="23.4"></rect>
+                <rect class="dot e1" rx="50" x="125.3" y="159.3" width="7" height="7"></rect>
+
                 </svg>
             </div>
 
         </div>
     
     </div>
-
     
     <!-- <div style="position: absolute;"><h1>Hi!</h1></div> -->
 
