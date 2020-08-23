@@ -48,7 +48,7 @@ body {
     margin-top: 100px;
 }
 
-#two {
+#two, #three {
     position: relative;
     z-index: 100;
 }
@@ -56,6 +56,11 @@ body {
 .b1, .b2, .f1 {
     /* display: none; */
     /* animation: disappear 16s ease infinite; */
+}
+
+.dot  {
+    position: relative;
+    z-index: 1000;
 }
 
 @keyframes dissappear {

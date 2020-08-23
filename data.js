@@ -4,6 +4,9 @@ $(document).ready( function () {
     //and the js animation is a [ 500ms delay + transtion time x + delay of x^2 + returning-back transition time x ] animation
     //this doesnt reaaly work tho lol
     const BASE_TIME = 1707;
+    let POS = [];
+    let earth = $('.container').get(0).getBoundingClientRect() //container holding all the SVG elements
+
 
     let counter = 0;
     let eqtr = 0;
@@ -43,8 +46,12 @@ $(document).ready( function () {
             this.container = path.parentNode;
             this.orig = path.getAttribute("d").toString();
             this.shape = path;
-            this.pos = this.container.getBoundingClientRect();
-            // console.log(this.pos)
+
+            //the problem with this line of code (i believe) is that
+            //we're calculating layout and throwing it away by in animate
+            // this.fakepos = this.container.getBoundingClientRect(); 
+
+            this.pos = this.setPOS(n);
             this.d = this.setForms(n);
             this.directionx = this.findX();
             this.directiony = this.findY();
@@ -53,7 +60,13 @@ $(document).ready( function () {
             this.duration = BASE_TIME;
             // console.log(Math.pow(this.duration, 2)* 0.001)
 
-            this.animate();
+            //this may not need to be a function to call w/i the class...
+            //why would i want to animate all these things before initiating all the objects?
+            // this.animate();
+        }
+
+        setPOS(n) {
+            return POS[n];
         }
 
         setForms(n) {
@@ -77,88 +90,110 @@ $(document).ready( function () {
             else { return dist - (this.pos.height / 2) }
         } 
 
-        to_sq() {
+        // to_sq() {
 
-            anime({
-                targets: ".dot",
-                rx: '0',
-                duration: 2000,
-            })
-        }
+        //     anime({
+        //         targets: ".dot",
+        //         round: 1,
+        //         rx: '0%',
+        //         easing: 'linear'
+                
+        //     })
+        // }
 
-        from_sq() {
-            anime({
-                targets: ".dot",
-                rx: '50',
-                duration: 2000,
-            })
-        }
+        // from_sq() {
+        //     anime({
+        //         targets: ".dot",
+        //         delay: 500,
+        //         round: 1,
+        //         rx: '50%',
+        //         easing: 'linear'
 
-        animate() { 
-            let move = anime.timeline({
-                easing: 'easeInOutQuad',
-                duration: this.duration,
-                complete: function() {this.restart();}
-            });
-
-            //i only did this because i just wanted to have a var name is igbo let me b
-            let biakota = 
-            {
-                targets: this.container,
-                translateX: this.directionx,
-                translateY: this.directiony,
-                translateZ: 0,
-                delay: 500, 
-            };
-
-            move.add(biakota)
-            .add({
-                targets: this.shape,
-                d: [ 
-                    {value: this.d[0], duration: (this.duration * 3) / 5}, 
-                    {value: this.d[1], duration: (this.duration * 2) / 5}
-                ]
-            }, '-=' + this.duration.toString())
-            .add({
-                targets: this.container,
-                delay: Math.pow(this.duration, 2) * 0.001,
-                translateX: 0,
-                translateY: 0,
-                translateZ: 0,
-
-            })
-            .add({
-                targets: this.shape,
-                d: [ 
-                    {value: this.d[0]}, 
-                    {value: this.orig}
-                ]
-            }, '-=' + this.duration.toString())
-            
-            
-            this.container.addEventListener('mouseenter', this.to_sq.bind(this));
-            this.container.addEventListener('mouseleave', this.from_sq.bind(this));
-            this.container.addEventListener('touchstart', this.to_sq.bind(this));
-            this.container.addEventListener('touchend', this.to_sq.bind(this));
-        }
+        //     })
+        // }
   
     }
     console.log($('.cir'));
+
+    function animate( shape ) { 
+        let move = anime.timeline({
+            easing: 'easeInOutQuad',
+            duration: shape.duration,
+            complete: function() {this.restart();}
+        });
+
+        //i only did this because i just wanted to have a var name is igbo let me b
+        let biakota = 
+        {
+            targets: shape.container,
+            translateX: shape.directionx,
+            translateY: shape.directiony,
+            translateZ: 0,
+            delay: 500, 
+        };
+
+        move.add(biakota)
+        .add({
+            targets: shape.shape,
+            d: [ 
+                {value: shape.d[0], duration: (shape.duration * 3) / 5}, 
+                {value: shape.d[1], duration: (shape.duration * 2) / 5}
+            ]
+        }, '-=' + shape.duration.toString())
+        .add({
+            targets: shape.container,
+            delay: Math.pow(shape.duration, 2) * 0.001,
+            translateX: 0,
+            translateY: 0,
+            translateZ: 0,
+
+        })
+        .add({
+            targets: shape.shape,
+            d: [ 
+                {value: shape.d[0]}, 
+                {value: shape.orig}
+            ]
+        }, '-=' + shape.duration.toString())
+    }
 
     //bido is start in igbo; again, let me be
    function bido() {
         let shapes = [];
         let items = $('.point'); //the specific SVG paths, not the container that holds it
-        let earth = $('.container').get(0).getBoundingClientRect() //container holding all the SVG elements
         eqtr = (earth.height + (earth.top + window.scrollY)) / 2;
         console.log(eqtr);
         prm_mrdn =  earth.left + (earth.width / 2);
+
+        items.each(function() {
+            POS.push(this.parentNode.getBoundingClientRect())
+        })
+
+        console.log(POS);
 
         items.each( function() {
             let obj = new Shape(this, counter)
             shapes.push(obj);
             counter++;
         });
+
+        anime({
+            targets: ".dot",
+            // delay: BASE_TIME * 2,
+            round: 1,
+            rx: [
+                {value: '50%'}, {value: '0%'}, {value: '50%', delay: BASE_TIME * 2}
+            ],
+            duration: BASE_TIME,
+            autoplay: true,
+            loop: true,
+            easing: 'linear'
+            
+        })
+
+        for (i=0; i < shapes.length; i++) {
+            animate(shapes[i]);
+        }
     }
 
     bido();
@@ -167,15 +202,13 @@ $(document).ready( function () {
         eqtr = (earth.height + (earth.top + window.scrollY)) / 2;
         console.log(prm_mrdn);
         prm_mrdn =  Math.ceil(earth.left + (earth.width / 2));
+        console.log(earth)
     })    
     
     // console.log("the earth");
-    // console.log(earth)
-
     // console.log(" prime meridian is " + prm_mrdn.toString() + " and equator is " + eqtr.toString())
 
     // console.log("The items")
-    // console.log(items)
-    // console.log(shapes);
+    
 
 })
