@@ -1,5 +1,6 @@
 $('html').addClass('hidden');
-$(document).ready( function () {
+$(window).on("load", function () {
+    $.ready.then(function() {
     console.log("in here!")
 
     //the idea behind is BASE_TIME is x = 1.707s where 4x = x^2 + 2x + 0.5
@@ -126,7 +127,6 @@ $(document).ready( function () {
                     updates++;
                 }
                 if ( !square && updates % 2 == 0 ) {
-                    console.log("to square!")
                     square = true;
                     anime({
                         targets: ".dot",
@@ -147,9 +147,7 @@ $(document).ready( function () {
                         duration: 2000
                     })
                 }
-                
                 this.restart();
-            
             }
         });
 
@@ -190,8 +188,7 @@ $(document).ready( function () {
 
     //bido is start in igbo; again, let me be
    function bido() {
-        console.log("bido");
-
+        console.log("in bido");
         $('html').removeClass('hidden');
         let earth = $('.container').get(0).getBoundingClientRect() //container holding all the SVG elements
 
@@ -230,25 +227,23 @@ $(document).ready( function () {
         for (i=0; i < shapes.length; i++) {
             animate(shapes[i]);
         }
-
     }
 
-    function initCall(fun){
-        console.log("init");
-        if (document.readyState === "complete") {
-            console.log("already loaded");
-            return fun();
-        } else { 
-            console.log(document.readyState)
-            setTimeout(initCall, 0);
-        }
-    }
+    // function initCall(fun){
+    //     console.log("init");
+    //     if (document.readyState === "complete") {
+    //         console.log("already loaded");
+    //         return fun();
+    //     } else { 
+    //         // console.log(document.readyState)
+    //         // setTimeout(initCall(fun), 50);
+
+    //     }
+    // }
 
 
-
-
-    initCall(bido);
-
+    // initCall(bido);
+    bido();
 
     $(window).on("resize", function () {
         earth = $('.container').get(0).getBoundingClientRect() //container holding all the SVG elements
@@ -266,6 +261,8 @@ $(document).ready( function () {
     // console.log(" prime meridian is " + prm_mrdn.toString() + " and equator is " + eqtr.toString())
 
     // console.log("The items")
-    
 
-})
+   window.addEventListener
+    
+    });
+});
