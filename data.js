@@ -199,13 +199,13 @@ $(document).ready( function () {
         }
     }
 
-    function initCall(fun){
+    function initCall(loadfun){
         if (document.readyState === "complete") {
             console.log("already loaded");
-            return fun();
+            return loadfun();
         } else if ( window.attachEvent ) {
             console.log("initCall window attach event")
-            window.attachEvent('onload', fun);
+            window.attachEvent('onload', loadfun);
         } else { 
             console.log(document.readyState)
             setTimeout(initCall, 0);
