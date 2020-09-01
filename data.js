@@ -262,7 +262,6 @@ $(window).on("load", function () {
 
     // console.log("The items")
 
-   window.addEventListener
     
     });
 });

@@ -55,18 +55,41 @@ body {
 
 .b1, .b2, .f1, .e1, .c1 {
     /* display: none; */
-    /* animation: disappear 16s ease infinite; */
+    
 }
 
-.dot  {
+rect, .b2 {
     position: relative;
     z-index: 1000;
+    -moz-animation: disappear 6.828s ease infinite;
+    animation: disappear 6.828s ease infinite;
 }
 
-@keyframes dissappear {
+.c0 {
+    animation: blue 6.828s ease infinite;
+}
+
+@keyframes disappear {
     0%{opacity: 1;}
+    25%{opacity: 0;}
     50%{opacity: 0;}
     100%{opacity: 1;}
+
+}
+@-moz-keyframes disappear {
+    0%{opacity: 1;}
+    25%{opacity: 0;}
+    50%{opacity: 0;}
+    100%{opacity: 1;}
+
+}
+
+@keyframes blue {
+    0%{fill: #97d8c4;}
+    25%{fill: #4059AD;}
+    50%{fill: #4059AD;}
+    65%{fill: #4059AD;}
+    100%{fill: #97d8c4;}
 
 }
 
