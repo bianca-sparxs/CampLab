@@ -65,10 +65,6 @@ rect, .b2 {
     animation: disappear 6.828s ease infinite;
 }
 
-.c0 {
-    animation: blue 6.828s ease infinite;
-}
-
 @keyframes disappear {
     0%{opacity: 1;}
     25%{opacity: 0;}
@@ -82,38 +78,4 @@ rect, .b2 {
     50%{opacity: 0;}
     100%{opacity: 1;}
 
-}
-
-@keyframes blue {
-    0%{fill: #97d8c4;}
-    25%{fill: #4059AD;}
-    50%{fill: #4059AD;}
-    65%{fill: #4059AD;}
-    100%{fill: #97d8c4;}
-
-}
-
-.css-selector {
-    background: linear-gradient(270deg, #efa241, #83e7c2);
-    background-size: 400% 400%;
-
-    -webkit-animation: AnimationName 30s ease infinite;
-    -moz-animation: AnimationName 30s ease infinite;
-    animation: AnimationName 30s ease infinite;
-}
-
-@-webkit-keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
-@-moz-keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
-@keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
 }
