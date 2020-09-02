@@ -2,7 +2,7 @@
 body {
     background-color: #eff2f1;
 }
-.container {
+.anim-container {
     display: inline-flex;
     flex-direction: row;
     height: auto;
