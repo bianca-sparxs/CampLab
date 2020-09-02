@@ -61,8 +61,8 @@ body {
 rect, .b2 {
     position: relative;
     z-index: 1000;
-    -moz-animation: disappear 6.828s ease infinite;
-    animation: disappear 6.828s ease infinite;
+    /* -moz-animation: disappear 6.828s ease infinite;
+    animation: disappear 6.828s ease infinite; */
 }
 
 @keyframes disappear {

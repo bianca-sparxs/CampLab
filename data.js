@@ -123,8 +123,34 @@ $(window).on("load", function () {
         let move = anime.timeline({
             easing: 'easeInOutQuad',
             duration: shape.duration,
-            change: function(animation) {
+            update: function(animation) {
+                //TODO: i should really call this outside since this is call on every update :<
                 if (shape.which == 4) {
+                    let progress = Math.round(animation.progress);
+                    //when animation progress at 29% (almost making a triangle) fade out dots
+                    if (progress == 27) {
+                        // console.log("27")
+                        anime({
+                            targets: ".dot, .b2",
+                            opacity: 0,
+                            easing: 'linear',
+                            duration: 500
+                        })
+                    }
+                    // console.log("if")
+                    //bring them back when animation progress at 90%
+                    if (progress == 90 ) {
+                        // console.log("27")
+                        anime({
+                            targets: ".dot",
+                            opacity: 1,
+                            easing: 'linear',
+                            duration: 1000
+                        })
+                    }
+                    
+                    
+
                     // console.log(Math.round(animation.progress));
                 } 
             },
@@ -139,7 +165,7 @@ $(window).on("load", function () {
                         round: 1,
                         rx: '0%',
                         easing: 'easeOutQuad',
-                        duration: 2000
+                        duration: 000
                     })
                 }
 
@@ -196,7 +222,7 @@ $(window).on("load", function () {
    function bido() {
         console.log("in bido");
         $('html').removeClass('hidden');
-        let earth = $('.container').get(0).getBoundingClientRect() //container holding all the SVG elements
+        let earth = $('.anim-container').get(0).getBoundingClientRect() //container holding all the SVG elements
 
         let shapes = [];
         let items = $('.point'); //the specific SVG paths, not the container that holds it
@@ -252,7 +278,7 @@ $(window).on("load", function () {
     bido();
 
     $(window).on("resize", function () {
-        earth = $('.container').get(0).getBoundingClientRect() //container holding all the SVG elements
+        earth = $('.anim-container').get(0).getBoundingClientRect() //container holding all the SVG elements
         counter = 0;
         shapes = [];
         POS = [];
