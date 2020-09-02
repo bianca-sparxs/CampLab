@@ -123,6 +123,11 @@ $(window).on("load", function () {
         let move = anime.timeline({
             easing: 'easeInOutQuad',
             duration: shape.duration,
+            change: function(animation) {
+                if (shape.which == 4) {
+                    // console.log(Math.round(animation.progress));
+                } 
+            },
             complete: function() {
                 if (shape.which == 4) {
                     updates++;
