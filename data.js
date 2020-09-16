@@ -1,7 +1,13 @@
 $('html').addClass('hidden');
+//had to add because a diff page was calling the the onInit listener initially so they was clashing
+//change below to [ == "PATHNAME" ] so the JS only runs on webpage of PATHNAME
+if (window.location.pathname != "chikin") {
 $(window).on("load", function () {
     $.ready.then(function() {
-    console.log("in here!")
+        console.log(window.location.pathname);
+        
+        
+            // console.log("in here!")
 
     //the idea behind is BASE_TIME is x = 1.707s where 4x = x^2 + 2x + 0.5
     //becoz the gradient transitions in index.html are 4parts, all equally timed
@@ -14,6 +20,7 @@ $(window).on("load", function () {
     let prm_mrdn = 0;
     let updates = 0;
     let square = false;
+    let items = $('.point'); //the specific SVG paths, not the container that holds it
 
     const CELL_FORM =[
         //_a shapes bottom left
@@ -45,7 +52,7 @@ $(window).on("load", function () {
 
     class Shape { //takes in the path of each SVG
         constructor(path, n) {
-            console.log(eqtr);
+            // console.log(earth);
             this.container = path.parentNode;
             this.which = n;
             this.orig = path.getAttribute("d").toString();
@@ -117,117 +124,117 @@ $(window).on("load", function () {
         // }
   
     }
-    console.log($('.cir'));
+    // console.log($('.cir'));
 
-    function animate( shape ) { 
-        let move = anime.timeline({
-            easing: 'easeInOutQuad',
-            duration: shape.duration,
-            update: function(animation) {
-                //TODO: i should really call this outside since this is call on every update :<
-                if (shape.which == 4) {
-                    let progress = Math.round(animation.progress);
-                    //when animation progress at 29% (almost making a triangle) fade out dots
-                    if (progress == 27) {
-                        // console.log("27")
-                        anime({
-                            targets: ".dot, .b2",
-                            opacity: 0,
-                            easing: 'linear',
-                            duration: 500
-                        })
+    function animate( shape, e ) { 
+        if (e == "init") {
+            let move = anime.timeline({
+                easing: 'easeInOutQuad',
+                duration: shape.duration,
+                update: function(animation) {
+                    if (shape.which == 4) {
+                        let progress = Math.round(animation.progress);
+                        //when animation progress at 29% (almost making a triangle) fade out dots
+                        if (progress == 27) {
+                            // console.log("27")
+                            anime({
+                                targets: ".dot, .b2",
+                                opacity: 0,
+                                easing: 'linear',
+                                duration: 500
+                            })
+                        }
+                        // console.log("if")
+                        //bring them back when animation progress at 90%
+                        if (progress == 90 ) {
+                            // console.log("27")
+                            anime({
+                                targets: ".dot",
+                                opacity: 1,
+                                easing: 'linear',
+                                duration: 1000
+                            })
+                        }
+                        // console.log(Math.round(animation.progress));
+                    } 
+                },
+                complete: function() {
+                    if (shape.which == 4) {
+                        updates++;
                     }
-                    // console.log("if")
-                    //bring them back when animation progress at 90%
-                    if (progress == 90 ) {
-                        // console.log("27")
+                    if ( !square && updates % 2 == 0 ) {
+                        square = true;
                         anime({
                             targets: ".dot",
-                            opacity: 1,
-                            easing: 'linear',
-                            duration: 1000
+                            round: 1,
+                            rx: '0%',
+                            easing: 'easeOutQuad',
+                            duration: 2000
                         })
                     }
-                    
-                    
-
-                    // console.log(Math.round(animation.progress));
-                } 
-            },
-            complete: function() {
-                if (shape.which == 4) {
-                    updates++;
+    
+                    if (square && updates % 2 == 1) {
+                        square = false;
+                        anime({
+                            targets: ".dot",
+                            round: 1,
+                            rx: '50%',
+                            easing: 'easeOutQuad',
+                            duration: 2000
+                        })
+                    }
+                    this.restart();
                 }
-                if ( !square && updates % 2 == 0 ) {
-                    square = true;
-                    anime({
-                        targets: ".dot",
-                        round: 1,
-                        rx: '0%',
-                        easing: 'easeOutQuad',
-                        duration: 000
-                    })
-                }
+            })
+            //i only did this because i just wanted to have a var name is igbo let me b
+            let biakota = 
+            {
+                targets: shape.container,
+                translateX: shape.directionx,
+                translateY: shape.directiony,
+                translateZ: 0,
+                delay: 500, 
+            };
 
-                if (square && updates % 2 == 1) {
-                    square = false;
-                    anime({
-                        targets: ".dot",
-                        round: 1,
-                        rx: '50%',
-                        easing: 'easeOutQuad',
-                        duration: 2000
-                    })
-                }
-                this.restart();
-            }
-        });
+            move.add(biakota)
+            .add({
+                targets: shape.shape,
+                d: [ 
+                    {value: shape.d[0], duration: (shape.duration * 3) / 5}, 
+                    {value: shape.d[1], duration: (shape.duration * 2) / 5}
+                ]
+            }, '-=' + shape.duration.toString())
+            .add({
+                targets: shape.container,
+                delay: Math.pow(shape.duration, 2) * 0.001,
+                translateX: 0,
+                translateY: 0,
+                translateZ: 0,
 
-        //i only did this because i just wanted to have a var name is igbo let me b
-        let biakota = 
-        {
-            targets: shape.container,
-            translateX: shape.directionx,
-            translateY: shape.directiony,
-            translateZ: 0,
-            delay: 500, 
-        };
-
-        move.add(biakota)
-        .add({
-            targets: shape.shape,
-            d: [ 
-                {value: shape.d[0], duration: (shape.duration * 3) / 5}, 
-                {value: shape.d[1], duration: (shape.duration * 2) / 5}
-            ]
-        }, '-=' + shape.duration.toString())
-        .add({
-            targets: shape.container,
-            delay: Math.pow(shape.duration, 2) * 0.001,
-            translateX: 0,
-            translateY: 0,
-            translateZ: 0,
-
-        })
-        .add({
-            targets: shape.shape,
-            d: [ 
-                {value: shape.d[0]}, 
-                {value: shape.orig}
-            ]
-        }, '-=' + shape.duration.toString())
-    }
+            })
+            .add({
+                targets: shape.shape,
+                d: [ 
+                    {value: shape.d[0]}, 
+                    {value: shape.orig}
+                ]
+            }, '-=' + shape.duration.toString())
+    
+        } else {
+            anime.remove( shape, 'dot');
+        }
+    } 
 
     //bido is start in igbo; again, let me be
    function bido() {
-        console.log("in bido");
+        // console.log("in bido");
         $('html').removeClass('hidden');
         let earth = $('.anim-container').get(0).getBoundingClientRect() //container holding all the SVG elements
 
         let shapes = [];
-        let items = $('.point'); //the specific SVG paths, not the container that holds it
+        // let items = $('.point'); 
         eqtr = (earth.height + (earth.top + window.scrollY)) / 2;
-        console.log(eqtr);
+        console.log(earth);
         prm_mrdn =  earth.left + (earth.width / 2);
 
         items.each(function() {
@@ -257,7 +264,7 @@ $(window).on("load", function () {
         // })
 
         for (i=0; i < shapes.length; i++) {
-            animate(shapes[i]);
+            animate(shapes[i], "init");
         }
     }
 
@@ -273,8 +280,6 @@ $(window).on("load", function () {
     //     }
     // }
 
-
-    // initCall(bido);
     bido();
 
     $(window).on("resize", function () {
@@ -283,9 +288,34 @@ $(window).on("load", function () {
         shapes = [];
         POS = [];
         eqtr = (earth.height + (earth.top + window.scrollY)) / 2;
-        console.log(prm_mrdn);
         prm_mrdn =  Math.ceil(earth.left + (earth.width / 2));
-        console.log(earth)
+
+        // bido();
+
+        items.each(function() {
+            POS.push(this.parentNode.getBoundingClientRect())
+        })
+
+        items.each( function() {
+            let obj = new Shape(this, counter)
+            shapes.push(obj);
+            counter++;
+        });
+
+        for (i=0; i < shapes.length; i++) {
+            shapes[i].directionx = shapes[i].findX();
+            console.log(shapes[i].findX());
+            shapes[i].directiony = shapes[i].findY();
+        }
+
+        console.log(POS)
+
+        for (i=0; i < shapes.length; i++) {
+            animate(shapes[i], "resize");
+        }
+
+
+        
         // bido();
     })    
     
@@ -295,5 +325,8 @@ $(window).on("load", function () {
     // console.log("The items")
 
     
+        
+    
     });
 });
+} else { $('html').removeClass('hidden');}
